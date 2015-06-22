@@ -23,11 +23,12 @@ bool cometd_connect(cometd_client_t * client, cometd_message * msg);
 bool cometd_string_startsWith(const char * string, const char * prefix);
   
 typedef struct {
-	cometd_client_t base;
-	void * subscriptions;
-	const char * clientId;
-	bool firstHandshakeOk;
-	json_t * handshakeFields;
+  cometd_client_t base;
+  void * subscriptions;
+  const char * clientId;
+  const char * userId;
+  bool firstHandshakeOk;
+  json_t * handshakeFields;
 } cometd_client_impl;
 
 typedef struct {

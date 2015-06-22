@@ -93,6 +93,7 @@ cometd_message * cometd_parse_message(json_t * source) {
 	message->connectionType = json_string_value(json_object_get(source, CONNECTION_TYPE_FIELD));
 	message->data = json_object_get(source, DATA_FIELD);
 	message->ext = json_object_get(source, EXT_FIELD);
+	message->userId = json_string_value(json_object_get(json_object_get(json_object_get(source, EXT_FIELD), "authentication"), "userId"));
 	message->supportedConnectionTypes = json_object_get(source, SUPPORTED_CONNECTION_TYPES_FIELD);
 	message->successful = json_is_true(json_object_get(source, SUCCESSFUL_FIELD));
 	json_t * advice = json_object_get(source, ADVICE_FIELD);
@@ -164,149 +165,283 @@ char*    concate_ids2channel(const char* bId, const char* SDepId, char* option)
   return (channel);
 }
 
-json_t  *init_messaging_data(char *Message, char *Target)
-{/* {target=toto, source=null, data={text=coucou}} */
-  json_t *root  =  json_object();
-  json_t *target  =  json_string(Target);
-  json_t *source = json_string("null");
-  json_t *data  =  json_object();
-  json_t *text  =  json_string(Message);
-
-  json_object_set(data, "text", text);
-  json_object_set(root, "target", target);
-  json_object_set(root, "source", source);
-  json_object_set(root, "data", data);
-  return(root);
-
-}
-
-json_t*  init_request_data(char *request, char *service, char *pNum, char *pSize)
+bool    cometd_macro_call_request(cometd_client_t *client, zeta_handshake_manager_t *hm, char *SDepId, char *name, HashMaps *param)
 {
-  json_t *data = json_object();
-  json_t* value = json_string(request);
-  if (pNum != NULL || pSize != NULL) {
-    json_t* page = json_object();
-    json_t* num = json_string(pNum);
-    json_t* size = json_string(pSize);
-    json_object_set(page, "pageNumber", num);
-    json_object_set(page, "pageSize", size);
-    json_object_set(data, "page", page);
-  }   
-  json_object_set(data, service, value);
+  CMTD_TRACE_IN
+    CALLOC(cometd_message, message);
+  cometd_client_impl* cli = (cometd_client_impl*)client;
+  static int id;
+  char *str = malloc(sizeof(str));
+  sprintf(str, "%d", id++);
   
-  return (data);
-}
+  message->id = str;
+  message->channel = concate_ids2channel(hm->businessId, SDepId, "call");
+  message->clientId = cli->clientId;
+  message->data = init_macro_call_data(name, param);
+  client->transport->sender(client->transport, message, client, true);
+  CMTD_RETURN(false);
+}  
 
-
-
-json_t* init_put_data(char *table, char *column, char *key, char *key2, HashMaps *YourData)
+bool    cometd_my_groups_request(cometd_client_t *client, zeta_handshake_manager_t *hm, char *SDepId, char *owner)
 {
-  json_t *data = json_object();
-  json_t* data2 = json_object();
-  json_t *Table = json_string(table);
-  json_t *Column = json_string(column);
-  json_t *Key = json_object();
-  json_t *Kkey = json_string(key);
-  bool isokay = false;
-  HashMaps *free;
+    CMTD_TRACE_IN
+    CALLOC(cometd_message, message);
+  cometd_client_impl* cli = (cometd_client_impl*)client;
+  static int id;
+  char *str = malloc(sizeof(str));
+  sprintf(str, "%d", id++);
   
-    while (YourData)
-      {
-	if (strcmp(YourData->type, "string") == 0)
-	  json_object_set(data2, YourData->key, json_string((char*)YourData->value));
-	else if (strcmp(YourData->type, "integer") == 0)
-	  json_object_set(data2, YourData->key, json_integer((int)YourData->value));
-	isokay = true;
-	YourData = YourData->next;
-      }
-    
-  json_object_set(Key, "__ref", Kkey);
-  
-  json_object_set(data,"table", Table);
-  json_object_set(data, "column", Column);
-  json_object_set(data, "key", Key);
-  if (key2 != NULL){
-    json_t *Key2 = json_string(key2);
-    json_object_set(data, "key2", Key2);
-  }
-  if (isokay == true)
-    json_object_set(data, "data", data2);
-  
-  return (data);
+  message->id = str;
+  message->channel = concate_ids2channel(hm->businessId, SDepId, "myGroups");
+  message->clientId = cli->clientId;
+  message->data = init_groups_mygroups_data(owner);
+  client->transport->sender(client->transport, message, client, true);
+  CMTD_RETURN(false);
 }
 
-json_t     *init_stack_data(char *stack, char *page, char *owner)
+bool    cometd_groups_request(cometd_client_t *client, zeta_handshake_manager_t *hm, char *SDepId, char *owner)
 {
-  json_t *Stack = json_string(stack);
-  json_t *Page = json_string(page);
-  json_t *Owner = json_string(owner);
-  json_t *root = json_object();
-
-  json_object_set(root, "stack", Stack);
-  //json_object_set(root, "page", Page);
-  json_object_set(root, "owner", Owner);
-  return (root);
+    CMTD_TRACE_IN
+    CALLOC(cometd_message, message);
+  cometd_client_impl* cli = (cometd_client_impl*)client;
+  static int id;
+  char *str = malloc(sizeof(str));
+  sprintf(str, "%d", id++);
+  
+  message->id = str;
+  message->channel = concate_ids2channel(hm->businessId, SDepId, "groups");
+  message->clientId = cli->clientId;
+  message->data = init_groups_mygroups_data(owner);
+  client->transport->sender(client->transport, message, client, true);
+  CMTD_RETURN(false);
 }
 
-json_t   *init_stack_push_data(char *Guid, char *Stack, HashMaps *Data, char *Owner)
+bool    cometd_group_del_users_request(cometd_client_t *client, zeta_handshake_manager_t *hm, char *SDepId, char *group, char *groupName, char *owner, HashMaps *users)
 {
-  json_t *root = json_object();
-  json_t *data = json_object();
-  json_t *stack = json_string(Stack);
-  json_t *owner = json_string(Owner);
-  json_t *guid = json_string(Guid);
-  bool isokay = false;
-  while (Data)
-    {
-      if (strcmp(Data->type, "string") == 0)
-	json_object_set(data, Data->key, json_string((char*)Data->value));
-      else if (strcmp(Data->type, "integer") == 0)
-	json_object_set(data, Data->key, json_integer((int)Data->value));
-      isokay = true;
-      Data = Data->next;
-    }
+    CMTD_TRACE_IN
+    CALLOC(cometd_message, message);
+  cometd_client_impl* cli = (cometd_client_impl*)client;
+  static int id;
+  char *str = malloc(sizeof(str));
+  sprintf(str, "%d", id++);
+  
+  message->id = str;
+  message->channel = concate_ids2channel(hm->businessId, SDepId, "delUsers");
+  message->clientId = cli->clientId;
+  message->data = init_del_users_data(group, groupName, owner, users);
+  client->transport->sender(client->transport, message, client, true);
+  CMTD_RETURN(false);
+} 
 
-  json_object_set(root, "guid", guid);
-  json_object_set(root, "stack", stack);
-  json_object_set(root, "owner", owner);
-  if (isokay == true)
-    json_object_set(root, "data", data);
-  return (root);
+bool    cometd_group_del_user_request(cometd_client_t *client, zeta_handshake_manager_t *hm, char *SDepId, char *group, char *owner, char *user)
+{
+  CMTD_TRACE_IN
+    CALLOC(cometd_message, message);
+  cometd_client_impl* cli = (cometd_client_impl*)client;
+  static int id;
+  char *str = malloc(sizeof(str));
+  sprintf(str, "%d", id++);
+  
+  message->id = str;
+  message->channel = concate_ids2channel(hm->businessId, SDepId, "delUser");
+  message->clientId = cli->clientId;
+  message->data = init_del_user_data(group, owner, user);
+  client->transport->sender(client->transport, message, client, true);
+  CMTD_RETURN(false);
 }
 
-json_t*     init_stack_remove_data(HashMaps *Data, char *Stack, char *Owner, int type){
-  json_t *root = json_object();
-  json_t *data = json_array();
-  json_t *owner = json_string(Owner);
-  json_t *stack = json_string(Stack);
-  size_t i = 0;
-  while (Data)
-    {
-      if (strcmp(Data->type, "string") == 0)
-	json_array_append(data, json_string((char*)Data->value));
-      Data = Data->next;
-    }
-  json_object_set(root, "stack", stack);
-  json_object_set(root, "owner", owner);
-  if (type == 1)
-    json_object_set(root, "listeners", data);
+bool    cometd_group_list_grant_request(cometd_client_t *client, zeta_handshake_manager_t *hm, char *SDepId, HashMaps *action, char *group, char *owner, char *ressource, bool rorg)
+{
+  CMTD_TRACE_IN
+    CALLOC(cometd_message, message);
+  cometd_client_impl* cli = (cometd_client_impl*)client;
+  static int id;
+  char *str = malloc(sizeof(str));
+  sprintf(str, "%d", id++);
+
+  message->id = str;
+  message->channel = concate_ids2channel(hm->businessId, SDepId, "listGrants");
+  message->clientId = cli->clientId;
+  message->data = init_list_grant_data(action, group, cli->userId, ressource);
+  client->transport->sender(client->transport, message, client, true);
+  CMTD_RETURN(false);
+}
+
+bool    cometd_group_revoke_and_grant_request(cometd_client_t *client, zeta_handshake_manager_t *hm, char *SDepId, char *action, char *group, char *owner, char *ressource, bool rorg)
+{
+  CMTD_TRACE_IN
+    CALLOC(cometd_message, message);
+  cometd_client_impl* cli = (cometd_client_impl*)client;
+  static int id;
+  char *str = malloc(sizeof(str));
+  sprintf(str, "%d", id++);
+  
+  message->id = str;
+  if (rorg)
+    message->channel = concate_ids2channel(hm->businessId, SDepId, "revoke");
   else
-    json_object_set(root, "guids", data);
-
-  return (root);
-  
+    message->channel = concate_ids2channel(hm->businessId, SDepId, "grant");
+  message->clientId = cli->clientId;
+  message->data = init_revoke_data(action, group, cli->userId, ressource);
+  client->transport->sender(client->transport, message, client, true);
+  CMTD_RETURN(false);
 }
 
-json_t*  init_stack_get_listeners_data(char *Stack, char *Owner)
+bool    cometd_group_del_request(cometd_client_t *client, zeta_handshake_manager_t *hm, char *SDepId, char *groupe, char *owner)
 {
-  json_t *root = json_object();
-  json_t *owner = json_string(Owner);
-  json_t *stack = json_string(Stack);
+  CMTD_TRACE_IN
+    CALLOC(cometd_message, message);
+  cometd_client_impl* cli = (cometd_client_impl*)client;
+  static int id;
+  char *str = malloc(sizeof(str));
+  sprintf(str, "%d", id++);
+  
+  message->id = str;
+  message->channel = concate_ids2channel(hm->businessId, SDepId, "delGroup");
+  message->clientId = cli->clientId;
+  message->data = init_add_me_data(groupe, cli->userId, NULL);
+  client->transport->sender(client->transport, message, client, true);
+  CMTD_RETURN(false);
+}
 
-  json_object_set(root, "stack", stack);
-  json_object_set(root, "owner", owner);
+bool    cometd_group_add_users_request(cometd_client_t *client, zeta_handshake_manager_t *hm, char *SDepId, char *group, char *groupName, char *owner, HashMaps *users)
+{
+  CMTD_TRACE_IN
+    CALLOC(cometd_message, message);
+  cometd_client_impl* cli = (cometd_client_impl*)client;
+  static int id;
+  char *str = malloc(sizeof(str));
+  sprintf(str, "%d", id++);
+  
+  message->id = str;
+  message->channel = concate_ids2channel(hm->businessId, SDepId, "addUsers");
+  message->clientId = cli->clientId;
+  message->data = init_add_users_data(group, groupName, cli->userId, users);
+  client->transport->sender(client->transport, message, client, true);
+  CMTD_RETURN(false);
+}
 
-  return (root);
+
+bool    cometd_group_users_request(cometd_client_t *client, zeta_handshake_manager_t *hm, char *SDepId, char *group)
+{  
+  CMTD_TRACE_IN
+    CALLOC(cometd_message, message);
+  cometd_client_impl* cli = (cometd_client_impl*)client;
+  static int id;
+  char *str = malloc(sizeof(str));
+  sprintf(str, "%d", id++);
+
+  message->id = str;
+  message->channel = concate_ids2channel(hm->businessId, SDepId, "groupUsers");
+  message->clientId = cli->clientId;
+  message->data = init_add_me_data(group, cli->userId, NULL);
+  client->transport->sender(client->transport, message, client, true);
+  CMTD_RETURN(false);
+}
+
+bool    cometd_add_me_request(cometd_client_t *client, zeta_handshake_manager_t *hm, char *SDepId, char *group, char *owner, char * user)
+{
+  CMTD_TRACE_IN
+    CALLOC(cometd_message, message);
+  cometd_client_impl* cli = (cometd_client_impl*)client;
+  static int id;
+  char *str = malloc(sizeof(str));
+  sprintf(str, "%d", id++);
+
+  message->id = str;
+  message->channel = concate_ids2channel(hm->businessId, SDepId, "addMe");
+  message->clientId = cli->clientId;
+  message->data = init_add_me_data(group, owner, cli->userId);
+  client->transport->sender(client->transport, message, client, true);
+  CMTD_RETURN(false);
+}
+
+bool    cometd_all_groups_request(cometd_client_t *client, zeta_handshake_manager_t *hm, char *SDepId, char *owner)
+{
+    CMTD_TRACE_IN
+    CALLOC(cometd_message, message);
+  cometd_client_impl* cli = (cometd_client_impl*)client;
+  static int id;
+  char *str = malloc(sizeof(str));
+  sprintf(str, "%d", id++);
+
+  message->id = str;
+  message->channel = concate_ids2channel(hm->businessId, SDepId, "allGroups");
+  message->clientId = cli->clientId;
+  message->data = init_group_create_data(NULL, NULL, owner);
+  client->transport->sender(client->transport, message, client, true);
+  CMTD_RETURN(false);
+}
+
+bool    cometd_group_create_request(cometd_client_t *client, zeta_handshake_manager_t *hm, char *SDepId, char *group, char *groupName)
+{
+  CMTD_TRACE_IN
+    CALLOC(cometd_message, message);
+  cometd_client_impl* cli = (cometd_client_impl*)client;
+  static int id;
+  char *str = malloc(sizeof(str));
+  sprintf(str, "%d", id++);
+  
+  message->id = str;
+  message->channel = concate_ids2channel(hm->businessId, SDepId, "createGroup");
+  message->clientId = cli->clientId;
+  message->data = init_group_create_data(group, groupName, cli->userId);
+  client->transport->sender(client->transport, message, client, true);
+  CMTD_RETURN(false);
+}
+
+
+bool     cometd_queue_done_request(cometd_client_t *client, zeta_handshake_manager_t *hm, char *SDepId, HashMaps *result, bool success, char *taskId)
+{
+  CMTD_TRACE_IN
+    CALLOC(cometd_message, message);
+  cometd_client_impl* cli = (cometd_client_impl*)client;
+  static int id;
+  char *str = malloc(sizeof(str));
+  sprintf(str, "%d", id++);
+
+  message->id = str;
+  message->channel = concate_ids2channel(hm->businessId, SDepId, "done");
+  message->clientId = cli->clientId;
+  message->data = init_queue_done_data(result, success, taskId);
+  client->transport->sender(client->transport, message, client, true);
+  CMTD_RETURN(false);
+}
+			       
+
+bool     cometd_queue_submit_request(cometd_client_t *client, zeta_handshake_manager_t *hm, char *SDepId, OwnerRessource *origin, char *desc, char *origBusy, char *origDep, HashMaps *data)
+{
+  /*  originator" : "OwnerResource", "description" : "String", "originBusinessId" : "String", "originDeploymentId" : "String", "data" : "Map[String,Object]"*/
+  CMTD_TRACE_IN
+    CALLOC(cometd_message, message);
+  cometd_client_impl* cli = (cometd_client_impl*)client;
+  static int id;
+  char *str = malloc(sizeof(str));
+  sprintf(str, "%d", id++);
+  
+  message->id = str;
+  message->channel = concate_ids2channel(hm->businessId, SDepId, "submit");
+  message->clientId = cli->clientId;
+  message->data = init_queue_submit_data(origin, desc, origBusy, origDep, data);
+  client->transport->sender(client->transport, message, client, true);
+  CMTD_RETURN(false);
+}
+
+bool     cometd_queue_register_request(cometd_client_t *client, zeta_handshake_manager_t *hm, char *SDepId, int qid)
+{
+  CMTD_TRACE_IN
+    CALLOC(cometd_message, message);
+  cometd_client_impl* cli = (cometd_client_impl*)client;
+  static int id;
+  char *str = malloc(sizeof(str));
+  sprintf(str, "%d", id++);
+
+  message->id = str;
+  message->channel = concate_ids2channel(hm->businessId, SDepId, "register");
+  message->clientId = cli->clientId;
+  message->data = init_queue_register_data(qid);
+  client->transport->sender(client->transport, message, client, true);
+  CMTD_RETURN(false);
 }
 
 bool     cometd_stack_get_listeners_request(cometd_client_t *client, zeta_handshake_manager_t *hm, char *SDepId, char *stack, char *owner)
@@ -317,7 +452,7 @@ bool     cometd_stack_get_listeners_request(cometd_client_t *client, zeta_handsh
   static int id;
   char *str = malloc(sizeof(str));
   sprintf(str, "%d", id++);
-  
+
   message->id = str;
   message->channel = concate_ids2channel(hm->businessId, SDepId, "getListeners");
   message->clientId = cli->clientId;

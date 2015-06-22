@@ -1,5 +1,6 @@
 #include <jansson.h>
 
+#include "cometd_internal.h"
 #include "zetaclient.h"
 #include "listingEntryInfo.h"
 #include "ListingGdaInfo.h"
@@ -9,20 +10,8 @@
 #include "HashMaps.h"
 #include "messageEntryInfo.h"
 #include "stackListingInfo.h"
-
-bool		cometd_request_echo(cometd_client_t* client, zeta_handshake_manager_t *hm, const char *request, const char *SDepId);
-
-bool		cometd_request_ls(cometd_client_t* client, zeta_handshake_manager_t *hm, const char *folder, const char* SDepId);
-
-bool		cometd_request_gda(cometd_client_t* client, zeta_handshake_manager_t *hm, const char *request, const char *SDepId, const char *tor);
-
-bool		stack_list_handler(cometd_client_t *client, cometd_message *message);
-
-bool		stack_remove_handler(cometd_client_t *client, cometd_message *message);
-
-bool		stack_set_listeners_handler(cometd_client_t *client, cometd_message *message);
-
-bool		stack_get_listeners_handler(struct cometd_client *client, cometd_message *message);
+#include "queueInfo.h"
+#include "handler.h"
 
 /* !!!!!!! Important read this and you will find the light at the end of the tunnel. Don't do cross reading you little monkey :3 !!!!!!!!
    
@@ -67,6 +56,49 @@ bool		stack_get_listeners_handler(struct cometd_client *client, cometd_message *
    Kind Cookies, Hakimu jungulu.
 */
 
+OwnerRessource*  fillRessource()
+{
+  OwnerRessource *res = malloc(sizeof(OwnerRessource));
+  res->owner = "toto";
+  res->ressource = "stack";
+
+  return res;
+}
+
+HashMaps   *fillUsers()
+{
+  HashMaps *list = HashMapInit();
+  list->type = "string";
+  list->key = "test3";
+  list->value = "OvWudbZchXdOa-uoMGZNfA";
+  list = AddKeyValue(list);
+  list->key = "test4";
+  list->type = "string";
+  list->value = "tfXrOlDf9CYWF88akl73Lg";
+  while (list->prev != NULL)
+    list = list->prev;
+  return (list);
+}
+
+HashMaps   *fillActions()
+{
+  HashMaps *list = HashMapInit();
+  list->type = "string";
+  list->key = "action";
+  list->value = "grant";
+  list = AddKeyValue(list);
+  list->type = "string";
+  list->key = "action";
+  list->value = "revoke";
+  list = AddKeyValue(list);
+  list->type = "string";
+  list->key = "action";
+  list->value = "grant";
+  while (list->prev != NULL)
+    list = list->prev;
+  return (list);
+}
+
 HashMaps   *fillMap()
 {
   HashMaps *list = HashMapInit();
@@ -103,6 +135,9 @@ int main(int argc, char** argv) {
 	const char * msging = "RSVu";
 	const char * stackId  = "cKXj";
 	const char * remoteId = "";
+	const char * queueId = "aHqx";
+	const char * groupe = "2v_u";
+	const char * macro = "57C3";
 	
 	printf("Starting test program for user %s and resource %s\n", login, resource);
 	if (cometd_init()) {
@@ -111,14 +146,39 @@ int main(int argc, char** argv) {
 		zeta_handshake_manager_t * hm = zeta_create_mem_handshake_manager(businessId, deploymentId, login, password);
 		zeta_client_t * client = zeta_create_client(server, cometd_create_long_polling_transport(), businessId, hm);		
 		if (client) {
-			printf("client created\n");
-			//cometd_channel_subscribe(client->cometClient, stack_get_listeners_handler, "/service/GmY-HuzW/cKXj/getListeners");
+		  printf("client created\n");
+		  cometd_channel_subscribe(client->cometClient, macro_call_handler, "/service/GmY-HuzW/57C3/call");
+		  cometd_channel_subscribe(client->cometClient, group_del_user_handler, "/service/GmY-HuzW/2v_u/delUser");
+		  cometd_channel_subscribe(client->cometClient, my_groups_handler, "/service/GmY-HuzW/2v_u/myGroups");
+		  //cometd_channel_subscribe(client->cometClient, group_list_grant_handler, "/service/GmY-HuzW/2v_u/listGrants");
+		  //cometd_channel_subscribe(client->cometClient, group_grant_handler,  "/service/GmY-HuzW/2v_u/grant");
+		  //cometd_channel_subscribe(client->cometClient, group_del_user_handler, "/service/GmY-HuzW/2v_u/delGroup");
+		  cometd_channel_subscribe(client->cometClient, group_add_users_handler, "/service/GmY-HuzW/2v_u/addUser");
+		  cometd_channel_subscribe(client->cometClient, group_users_handler, "/service/GmY-HuzW/2v_u/groupUsers");
+		  //cometd_channel_subscribe(client->cometClient, group_create_handler, "/service/GmY-HuzW/2v_u/createGroup");
+		  //cometd_channel_subscribe(client->cometClient, all_groups_handler, "/service/GmY-HuzW/2v_u/allGroups");
+		  //cometd_channel_subscribe(client->cometClient, add_me_handler, "/service/GmY-HuzW/2v_u/error");
+		  //cometd_channel_subscribe(client->cometClient, add_me_handler, "/service/GmY-HuzW/2v_u/addMe");
 			int i = 0;
 			if (!zeta_handshake(client)) {
 			  printf("cometd_handshake OK\n");
+			  cometd_client_impl* cli = (cometd_client_impl*)client->cometClient;
 			  while (!cometd_main_loop(client->cometClient)) {
 			    puts("---------Echo request---------");
-			    //cometd_stack_push_request(client->cometClient, hm, guid, stack, fillMap(), owner);
+			    cometd_macro_call_request(client->cometClient, hm, macro, "add", fillMap());
+			    //cometd_my_groups_request(client->cometClient, hm, groupe, cli->userId);
+			    //cometd_group_del_users_request(client->cometClient, hm, groupe, "firstgroup", "firstgroup", cli->userId, fillUsers());
+			    //cometd_group_del_user_request(client->cometClient, hm, groupe, "firstgroup", cli->userId, "tfXrOlDf9CYWF88akl73Lg");
+			    //cometd_group_revoke_and_grant_request(client->cometClient, hm, groupe, "revoke", "zetagroup", "", "none", true);
+			    //cometd_group_list_grant_request(client->cometClient, hm, groupe, fillActions(), "zetagroup", "", "none", true);
+			    //cometd_group_revoke_and_grant_request(client->cometClient, hm, groupe, "revoke", "zetagroup", "", "none", true);
+			    //cometd_group_revoke_and_grant_request(client->cometClient, hm, groupe, "grant", "zetagroup", "", "none", false);
+			    //cometd_group_del_request(client->cometClient, hm, groupe, "zetagroup", "");
+			    //cometd_group_add_users_request(client->cometClient, hm, groupe, "firstgroup", "firstgroup", cli->userId, fillUsers());			    
+			    //cometd_group_users_request(client->cometClient, hm, groupe, "firstgroup");
+			    //cometd_group_create_request(client->cometClient, hm, groupe, "firstgroup", "firstgroup");
+			    //cometd_all_groups_request(client->cometClient, hm, groupe, "mikael");
+			    //cometd_add_me_request(client->cometClient, hm, groupe, "Groupe", "mikael", "toto");
 			    puts("---------Echo Request---------");
 			    //printf("cometd_main_loop OK\n");
 			    //if (!(i++ % 10))

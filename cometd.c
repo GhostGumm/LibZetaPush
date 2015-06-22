@@ -5,7 +5,6 @@
 #include "cometd.h"
 #include "cometd_internal.h"
 
-
 cometd_malloc cometd_malloc_fn = &malloc;
 cometd_free cometd_free_fn = &free;
 
@@ -55,6 +54,14 @@ static bool cometd_handshake_callback(cometd_client_t * client, cometd_message *
 	//printf("received ");
 	//cometd_dump_message_file(stdout, message);
 	//printf("\n");
+	if (message->userId) {
+	  CMTD_TRACE_DEBUG("message->userId received %s\n", message->userId)
+	    size_t size = strlen(message->userId) + 1;
+	  char * b = cometd_malloc_fn(size);
+	  memcpy(b, message->userId, size);
+	  cli->userId = b;
+	}
+	
 	if (message->clientId) {
 		cli->firstHandshakeOk = true;
 		CMTD_TRACE_DEBUG("message->clientId received %s\n", message->clientId)

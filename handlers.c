@@ -10,7 +10,114 @@
 #include "messageEntryInfo.h"
 #include "stackListenerInfo.h"
 
-bool stack_get_listeners_handler(struct cometd_client *client, cometd_message *message)
+bool            macro_call_handler(cometd_client_t *client, cometd_message *message)
+{
+  printf("macro is handled\n");
+  return (true);
+}
+
+bool            group_del_user_handler(cometd_client_t *client, cometd_message *message)
+{
+  printf("User deleted successfuly\n");
+  return (true);
+}
+
+bool            group_del_users_handler(cometd_client_t *client, cometd_message *message)
+{
+  printf("Users deleted successfuly\n");
+  
+  return (true);
+}
+
+bool            groups_handler(cometd_client_t *client, cometd_message *message)
+{
+  printf("Groups handled successfully\n");
+  return (true);
+}
+
+bool            my_groups_handler(cometd_client_t *client, cometd_message *message)
+{
+  printf("My Groups handled successfully \n");
+  return (true);
+}
+
+bool group_list_grant_handler(cometd_client_t *client, cometd_message *message)
+{
+  printf("ready to parse grant accesss\n");
+  return (true);
+}
+bool group_error_handler(cometd_client_t *client, cometd_message *message)
+{
+  printf("An error occured while trying to query the server\n");
+
+  return(true);
+}
+
+bool group_grant_handler(cometd_client_t *client, cometd_message *message)
+{
+  printf("Access rights granted\n");
+
+  return(true);
+}
+
+bool group_revoke_handler(cometd_client_t *client, cometd_message *message)
+{
+  printf("revokation successfully done\n");
+
+  return (true);
+}
+
+bool group_add_users_handler(cometd_client_t *client, cometd_message *message)
+{
+  printf("user successfully added\n");
+  return(true);
+}
+
+bool group_users_handler(cometd_client_t *client, cometd_message *message)
+{
+  printf("all users ready to parse\n");
+  UsersParsingInfo(message);
+  return(true);
+}
+
+bool add_me_handler(cometd_client_t *client, cometd_message *message)
+{
+  printf("add me handled\n");
+  return(true);
+}
+
+bool all_groups_handler(cometd_client_t *client, cometd_message *message)
+{
+  printf("AllGroup list done\n");
+  return(true);
+}
+
+bool group_create_handler(cometd_client_t *client, cometd_message *message)
+{
+  printf("Groupe Created successfully\n");
+  return (true);
+}
+
+
+bool queue_done_handler(cometd_client_t *client, cometd_message *message)
+{
+  printf("Done is handled \n");
+  return (true);
+}
+
+bool queue_submit_handler(cometd_client_t *client, cometd_message *message)
+{
+  printf("Queue submit handled\n");
+  return (true);
+}
+
+bool queue_register_handler(cometd_client_t *client, cometd_message *message)
+{
+  printf("Queue register handled\n");
+  return (true);
+}
+
+bool stack_get_listeners_handler(cometd_client_t *client, cometd_message *message)
 {
   printf("ready to parse the get listeners\n");
   ListenerParsingInfo(message);

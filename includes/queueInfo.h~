@@ -1,0 +1,15 @@
+#ifndef QUEUE_INFO_
+#define QUEUE_INFO_
+
+#include <stdlib.h>
+
+
+struct OwnerRessource
+{
+  const char *owner;
+  const char *ressource;
+};
+
+
+
+#endif
