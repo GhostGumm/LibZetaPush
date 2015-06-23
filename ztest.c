@@ -1,5 +1,3 @@
-#include <jansson.h>
-
 #include "cometd_internal.h"
 #include "zetaclient.h"
 #include "listingEntryInfo.h"
@@ -166,7 +164,7 @@ int main(int argc, char** argv) {
 			  while (!cometd_main_loop(client->cometClient)) {
 			    puts("---------Echo request---------");
 			    cometd_macro_call_request(client->cometClient, hm, macro, "add", fillMap());
-			    //cometd_my_groups_request(client->cometClient, hm, groupe, cli->userId);
+			    cometd_my_groups_request(client->cometClient, hm, groupe, cli->userId);
 			    //cometd_group_del_users_request(client->cometClient, hm, groupe, "firstgroup", "firstgroup", cli->userId, fillUsers());
 			    //cometd_group_del_user_request(client->cometClient, hm, groupe, "firstgroup", cli->userId, "tfXrOlDf9CYWF88akl73Lg");
 			    //cometd_group_revoke_and_grant_request(client->cometClient, hm, groupe, "revoke", "zetagroup", "", "none", true);

@@ -8,7 +8,7 @@
 static int sid;
 
 int cometd_json_dump_callback_file(const char *buffer, size_t size, void *data) {
-	return fwrite(buffer, size, 1, (FILE*)data) < 0; // TODO limit length
+  return 0;  //fwrite(buffer, size, 1, (FILE*)data) < 0; // TODO limit length
 }
 int cometd_json_dump_callback_buffer(const char *buffer, size_t size, void *data) {
 	return cometd_buffer_append((cometd_buffer_t*) data, buffer, size);
@@ -165,7 +165,7 @@ char*    concate_ids2channel(const char* bId, const char* SDepId, char* option)
   return (channel);
 }
 
-bool    cometd_macro_call_request(cometd_client_t *client, zeta_handshake_manager_t *hm, char *SDepId, char *name, HashMaps *param)
+bool    cometd_macro_call_request(cometd_client_t *client, zeta_handshake_manager_t *hm, const char *SDepId, char *name, HashMaps *param)
 {
   CMTD_TRACE_IN
     CALLOC(cometd_message, message);
@@ -182,7 +182,7 @@ bool    cometd_macro_call_request(cometd_client_t *client, zeta_handshake_manage
   CMTD_RETURN(false);
 }  
 
-bool    cometd_my_groups_request(cometd_client_t *client, zeta_handshake_manager_t *hm, char *SDepId, char *owner)
+bool    cometd_my_groups_request(cometd_client_t *client, zeta_handshake_manager_t *hm, const char *SDepId, const char *owner)
 {
     CMTD_TRACE_IN
     CALLOC(cometd_message, message);
@@ -199,7 +199,7 @@ bool    cometd_my_groups_request(cometd_client_t *client, zeta_handshake_manager
   CMTD_RETURN(false);
 }
 
-bool    cometd_groups_request(cometd_client_t *client, zeta_handshake_manager_t *hm, char *SDepId, char *owner)
+bool    cometd_groups_request(cometd_client_t *client, zeta_handshake_manager_t *hm, const char *SDepId, char *owner)
 {
     CMTD_TRACE_IN
     CALLOC(cometd_message, message);
@@ -216,7 +216,7 @@ bool    cometd_groups_request(cometd_client_t *client, zeta_handshake_manager_t 
   CMTD_RETURN(false);
 }
 
-bool    cometd_group_del_users_request(cometd_client_t *client, zeta_handshake_manager_t *hm, char *SDepId, char *group, char *groupName, char *owner, HashMaps *users)
+bool    cometd_group_del_users_request(cometd_client_t *client, zeta_handshake_manager_t *hm, const char *SDepId, char *group, char *groupName, char *owner, HashMaps *users)
 {
     CMTD_TRACE_IN
     CALLOC(cometd_message, message);
@@ -233,7 +233,7 @@ bool    cometd_group_del_users_request(cometd_client_t *client, zeta_handshake_m
   CMTD_RETURN(false);
 } 
 
-bool    cometd_group_del_user_request(cometd_client_t *client, zeta_handshake_manager_t *hm, char *SDepId, char *group, char *owner, char *user)
+bool    cometd_group_del_user_request(cometd_client_t *client, zeta_handshake_manager_t *hm, const char *SDepId, char *group, char *owner, char *user)
 {
   CMTD_TRACE_IN
     CALLOC(cometd_message, message);
@@ -250,7 +250,7 @@ bool    cometd_group_del_user_request(cometd_client_t *client, zeta_handshake_ma
   CMTD_RETURN(false);
 }
 
-bool    cometd_group_list_grant_request(cometd_client_t *client, zeta_handshake_manager_t *hm, char *SDepId, HashMaps *action, char *group, char *owner, char *ressource, bool rorg)
+bool    cometd_group_list_grant_request(cometd_client_t *client, zeta_handshake_manager_t *hm, const char *SDepId, HashMaps *action, char *group, char *owner, char *ressource, bool rorg)
 {
   CMTD_TRACE_IN
     CALLOC(cometd_message, message);
@@ -262,12 +262,12 @@ bool    cometd_group_list_grant_request(cometd_client_t *client, zeta_handshake_
   message->id = str;
   message->channel = concate_ids2channel(hm->businessId, SDepId, "listGrants");
   message->clientId = cli->clientId;
-  message->data = init_list_grant_data(action, group, cli->userId, ressource);
+  message->data = init_list_grant_data(action, group, owner, ressource);
   client->transport->sender(client->transport, message, client, true);
   CMTD_RETURN(false);
 }
 
-bool    cometd_group_revoke_and_grant_request(cometd_client_t *client, zeta_handshake_manager_t *hm, char *SDepId, char *action, char *group, char *owner, char *ressource, bool rorg)
+bool    cometd_group_revoke_and_grant_request(cometd_client_t *client, zeta_handshake_manager_t *hm, const char *SDepId, char *action, char *group, char *owner, char *ressource, bool rorg)
 {
   CMTD_TRACE_IN
     CALLOC(cometd_message, message);
@@ -282,12 +282,12 @@ bool    cometd_group_revoke_and_grant_request(cometd_client_t *client, zeta_hand
   else
     message->channel = concate_ids2channel(hm->businessId, SDepId, "grant");
   message->clientId = cli->clientId;
-  message->data = init_revoke_data(action, group, cli->userId, ressource);
+  message->data = init_revoke_data(action, group, owner, ressource);
   client->transport->sender(client->transport, message, client, true);
   CMTD_RETURN(false);
 }
 
-bool    cometd_group_del_request(cometd_client_t *client, zeta_handshake_manager_t *hm, char *SDepId, char *groupe, char *owner)
+bool    cometd_group_del_request(cometd_client_t *client, zeta_handshake_manager_t *hm, const char *SDepId, char *groupe, char *owner)
 {
   CMTD_TRACE_IN
     CALLOC(cometd_message, message);
@@ -299,12 +299,12 @@ bool    cometd_group_del_request(cometd_client_t *client, zeta_handshake_manager
   message->id = str;
   message->channel = concate_ids2channel(hm->businessId, SDepId, "delGroup");
   message->clientId = cli->clientId;
-  message->data = init_add_me_data(groupe, cli->userId, NULL);
+  message->data = init_add_me_data(groupe, owner, NULL);
   client->transport->sender(client->transport, message, client, true);
   CMTD_RETURN(false);
 }
 
-bool    cometd_group_add_users_request(cometd_client_t *client, zeta_handshake_manager_t *hm, char *SDepId, char *group, char *groupName, char *owner, HashMaps *users)
+bool    cometd_group_add_users_request(cometd_client_t *client, zeta_handshake_manager_t *hm, const char *SDepId, char *group, char *groupName, char *owner, HashMaps *users)
 {
   CMTD_TRACE_IN
     CALLOC(cometd_message, message);
@@ -316,13 +316,13 @@ bool    cometd_group_add_users_request(cometd_client_t *client, zeta_handshake_m
   message->id = str;
   message->channel = concate_ids2channel(hm->businessId, SDepId, "addUsers");
   message->clientId = cli->clientId;
-  message->data = init_add_users_data(group, groupName, cli->userId, users);
+  message->data = init_add_users_data(group, groupName, owner, users);
   client->transport->sender(client->transport, message, client, true);
   CMTD_RETURN(false);
 }
 
 
-bool    cometd_group_users_request(cometd_client_t *client, zeta_handshake_manager_t *hm, char *SDepId, char *group)
+bool    cometd_group_users_request(cometd_client_t *client, zeta_handshake_manager_t *hm, const char *SDepId, char *group, char *owner)
 {  
   CMTD_TRACE_IN
     CALLOC(cometd_message, message);
@@ -334,12 +334,12 @@ bool    cometd_group_users_request(cometd_client_t *client, zeta_handshake_manag
   message->id = str;
   message->channel = concate_ids2channel(hm->businessId, SDepId, "groupUsers");
   message->clientId = cli->clientId;
-  message->data = init_add_me_data(group, cli->userId, NULL);
+  message->data = init_add_me_data(group, owner, NULL);
   client->transport->sender(client->transport, message, client, true);
   CMTD_RETURN(false);
 }
 
-bool    cometd_add_me_request(cometd_client_t *client, zeta_handshake_manager_t *hm, char *SDepId, char *group, char *owner, char * user)
+bool    cometd_add_me_request(cometd_client_t *client, zeta_handshake_manager_t *hm, const char *SDepId, char *group, char *owner, char * user)
 {
   CMTD_TRACE_IN
     CALLOC(cometd_message, message);
@@ -351,12 +351,12 @@ bool    cometd_add_me_request(cometd_client_t *client, zeta_handshake_manager_t 
   message->id = str;
   message->channel = concate_ids2channel(hm->businessId, SDepId, "addMe");
   message->clientId = cli->clientId;
-  message->data = init_add_me_data(group, owner, cli->userId);
+  message->data = init_add_me_data(group, owner, user);
   client->transport->sender(client->transport, message, client, true);
   CMTD_RETURN(false);
 }
 
-bool    cometd_all_groups_request(cometd_client_t *client, zeta_handshake_manager_t *hm, char *SDepId, char *owner)
+bool    cometd_all_groups_request(cometd_client_t *client, zeta_handshake_manager_t *hm, const char *SDepId, char *owner)
 {
     CMTD_TRACE_IN
     CALLOC(cometd_message, message);
@@ -373,7 +373,7 @@ bool    cometd_all_groups_request(cometd_client_t *client, zeta_handshake_manage
   CMTD_RETURN(false);
 }
 
-bool    cometd_group_create_request(cometd_client_t *client, zeta_handshake_manager_t *hm, char *SDepId, char *group, char *groupName)
+bool    cometd_group_create_request(cometd_client_t *client, zeta_handshake_manager_t *hm, const char *SDepId, char *group, char *groupName, char *owner)
 {
   CMTD_TRACE_IN
     CALLOC(cometd_message, message);
@@ -385,13 +385,12 @@ bool    cometd_group_create_request(cometd_client_t *client, zeta_handshake_mana
   message->id = str;
   message->channel = concate_ids2channel(hm->businessId, SDepId, "createGroup");
   message->clientId = cli->clientId;
-  message->data = init_group_create_data(group, groupName, cli->userId);
+  message->data = init_group_create_data(group, groupName, owner);
   client->transport->sender(client->transport, message, client, true);
   CMTD_RETURN(false);
 }
 
-
-bool     cometd_queue_done_request(cometd_client_t *client, zeta_handshake_manager_t *hm, char *SDepId, HashMaps *result, bool success, char *taskId)
+bool     cometd_queue_done_request(cometd_client_t *client, zeta_handshake_manager_t *hm, const char *SDepId, HashMaps *result, bool success, char *taskId)
 {
   CMTD_TRACE_IN
     CALLOC(cometd_message, message);
@@ -409,7 +408,7 @@ bool     cometd_queue_done_request(cometd_client_t *client, zeta_handshake_manag
 }
 			       
 
-bool     cometd_queue_submit_request(cometd_client_t *client, zeta_handshake_manager_t *hm, char *SDepId, OwnerRessource *origin, char *desc, char *origBusy, char *origDep, HashMaps *data)
+bool     cometd_queue_submit_request(cometd_client_t *client, zeta_handshake_manager_t *hm, const char *SDepId, OwnerRessource *origin, char *desc, char *origBusy, char *origDep, HashMaps *data)
 {
   /*  originator" : "OwnerResource", "description" : "String", "originBusinessId" : "String", "originDeploymentId" : "String", "data" : "Map[String,Object]"*/
   CMTD_TRACE_IN
@@ -427,7 +426,7 @@ bool     cometd_queue_submit_request(cometd_client_t *client, zeta_handshake_man
   CMTD_RETURN(false);
 }
 
-bool     cometd_queue_register_request(cometd_client_t *client, zeta_handshake_manager_t *hm, char *SDepId, int qid)
+bool     cometd_queue_register_request(cometd_client_t *client, zeta_handshake_manager_t *hm, const char *SDepId, int qid)
 {
   CMTD_TRACE_IN
     CALLOC(cometd_message, message);
@@ -444,7 +443,7 @@ bool     cometd_queue_register_request(cometd_client_t *client, zeta_handshake_m
   CMTD_RETURN(false);
 }
 
-bool     cometd_stack_get_listeners_request(cometd_client_t *client, zeta_handshake_manager_t *hm, char *SDepId, char *stack, char *owner)
+bool     cometd_stack_get_listeners_request(cometd_client_t *client, zeta_handshake_manager_t *hm, const char *SDepId, char *stack, char *owner)
 {
   CMTD_TRACE_IN
     CALLOC(cometd_message, message);
@@ -461,7 +460,7 @@ bool     cometd_stack_get_listeners_request(cometd_client_t *client, zeta_handsh
   CMTD_RETURN(false);
 }
 
-bool     cometd_stack_set_listeners_request(cometd_client_t *client, zeta_handshake_manager_t *hm, char *SDepId, HashMaps *setString, char *stack, char *owner)
+bool     cometd_stack_set_listeners_request(cometd_client_t *client, zeta_handshake_manager_t *hm, const char *SDepId, HashMaps *setString, char *stack, char *owner)
 {
   CMTD_TRACE_IN
     CALLOC(cometd_message, message);
@@ -479,7 +478,7 @@ bool     cometd_stack_set_listeners_request(cometd_client_t *client, zeta_handsh
 
 }
 
-bool      cometd_stack_remove_request(cometd_client_t *client, zeta_handshake_manager_t *hm, char *SDepId, HashMaps *guidList, char *stack, char *owner)
+bool      cometd_stack_remove_request(cometd_client_t *client, zeta_handshake_manager_t *hm, const char *SDepId, HashMaps *guidList, char *stack, char *owner)
 {
   CMTD_TRACE_IN
     CALLOC(cometd_message, message);
@@ -496,7 +495,7 @@ bool      cometd_stack_remove_request(cometd_client_t *client, zeta_handshake_ma
   CMTD_RETURN(false);
 }
 
-bool       cometd_stack_push_request(cometd_client_t *client, zeta_handshake_manager_t *hm, char *SDepId, char *guid, char *stack, HashMaps *data, char *owner)
+bool       cometd_stack_push_request(cometd_client_t *client, zeta_handshake_manager_t *hm, const char *SDepId, char *guid, char *stack, HashMaps *data, char *owner)
 {
   CMTD_TRACE_IN
     CALLOC(cometd_message, message);
@@ -514,7 +513,7 @@ bool       cometd_stack_push_request(cometd_client_t *client, zeta_handshake_man
 }
 
 
-bool       cometd_stack_listing_request(cometd_client_t *client, zeta_handshake_manager_t *hm, char *SDepId, char *stack, char *page, char *owner)
+bool       cometd_stack_listing_request(cometd_client_t *client, zeta_handshake_manager_t *hm, const char *SDepId, char *stack, char *page, char *owner)
 {
   CMTD_TRACE_IN
     CALLOC(cometd_message, message);
@@ -531,7 +530,7 @@ bool       cometd_stack_listing_request(cometd_client_t *client, zeta_handshake_
   CMTD_RETURN(false);
 }
 
-bool       cometd_request_messaging(cometd_client_t *client, zeta_handshake_manager_t *hm, char *SDepId, char *Target, char *Message)
+bool       cometd_request_messaging(cometd_client_t *client, zeta_handshake_manager_t *hm, const char *SDepId, char *Target, char *Message)
 {/*  {target=toto, source=null, data={text=coucou}} */
   
   CMTD_TRACE_IN
@@ -548,7 +547,7 @@ bool       cometd_request_messaging(cometd_client_t *client, zeta_handshake_mana
   CMTD_RETURN(false);
 }
 
-bool       cometd_request_get_gda(cometd_client_t* client, zeta_handshake_manager_t *hm, char *SDepId, char *table,  char *column , char *key, char *key2)
+bool       cometd_request_get_gda(cometd_client_t* client, zeta_handshake_manager_t *hm, const char *SDepId, char *table,  char *column , char *key, char *key2)
 {/*[{"id":"7","channel":"/service/GmY-HuzW/IFa0/get","data":{"table":"userList","column":"list","key":"mikaelmorvan11"},"clientId":"3g1it0k2t9afst01c9qc5tzknjjq"}]*/
 
 /*[{"data": {"table":"userList", "key":"${str:rnd64(6)}", "column":"list"}, "channel":"/service/GmY-HuzW/IFa0/get", "successful":false, "id":"5", "clientId": "70pt7hyaty6efqt7q7ap7uhd3q"}]*/
@@ -569,7 +568,7 @@ bool       cometd_request_get_gda(cometd_client_t* client, zeta_handshake_manage
   CMTD_RETURN(false);
 }
 
-bool       cometd_request_put_gda(cometd_client_t* client, zeta_handshake_manager_t *hm, char *SDepId, char *table,  char *column , char *key, char *key2, HashMaps *YourData)
+bool       cometd_request_put_gda(cometd_client_t* client, zeta_handshake_manager_t *hm, const char *SDepId, char *table,  char *column , char *key, char *key2, HashMaps *YourData)
 {  /* [{"id":"12","channel":"/service/GmY-HuzW/IFa0/put","data":{"table":"userList","column":"list","key":{"__ref":"${str:rnd64(6)}"},"data":{"fistName":"Mikael","lastName":"Morvan"}},"clientId":"3c1svz3e26v4k8lo8stg0mfj59k"}] */
   /* [{"channel": "/service/GmY-HuzW/IFa0/put", "id": "5", "clientId": "861w4r3127e8i5p1aa9l2n9p03ud", "data": {"column": "list", "table": "userList", "key": "${str:rnd64(6)}", "data": {"firstName": "Mikael", "lastName": "Morvan"}}, "successful": false}]*/
   
@@ -588,7 +587,7 @@ bool       cometd_request_put_gda(cometd_client_t* client, zeta_handshake_manage
   CMTD_RETURN(false);
 }
 
-bool       cometd_request_list_gda(cometd_client_t* client, zeta_handshake_manager_t *hm, char *SDepId, char *table, char *column, char *pNum, char *pSize)
+bool       cometd_request_list_gda(cometd_client_t* client, zeta_handshake_manager_t *hm, const char *SDepId, char *table, char *column, char *pNum, char *pSize)
 {/*[{"id":"9","channel":"/service/GmY-HuzW/IFa0/list","data":{"table":"userList"},"clientId":"3c1svz3e26v4k8lo8stg0mfj59k"}]*/
   CMTD_TRACE_IN
     CALLOC(cometd_message, message);
@@ -605,7 +604,7 @@ bool       cometd_request_list_gda(cometd_client_t* client, zeta_handshake_manag
   CMTD_RETURN(false);
 }
 
-bool       cometd_request_echo(cometd_client_t* client, zeta_handshake_manager_t *hm, char *request, char *SDepId)
+bool       cometd_request_echo(cometd_client_t* client, zeta_handshake_manager_t *hm, char *request, const char *SDepId)
 { /*{"id":"5","channel":"/service/GmY-HuzW/w3FQ/echo","data":{"message":"Hello Echo Service"},"clientId":"2pcstwmu0tegq82qvyvep25dri"}]*/
   CMTD_TRACE_IN
     CALLOC(cometd_message, message);

@@ -14,6 +14,8 @@
 #include "HashMaps.h"
 #include "queueInfo.h"
 
+
+
 #ifdef __cplusplus
 extern "C" {
 #endif
@@ -49,12 +51,9 @@ typedef struct {
 
   
   json_t        *init_macro_call_data(char *name, HashMaps *params);
-  json_t        *init_groups_mygroups_data(char *owner);
-  
-  
   json_t        *init_del_user_data(char *group, char *owner, char *user);
   json_t        *init_del_users_data(char *group, char *groupName, char *owner, HashMaps *user);
-  json_t        *init_groups_mygroups_data(char *owner);
+  json_t        *init_groups_mygroups_data(const char *owner);
   json_t        *init_list_grant_data(HashMaps *data, char *group, const char *owner, char *ressource); 
   json_t        *init_revoke_data(char *action, char *group, const char *owner, char *ressource);
   json_t        *init_add_users_data(char *Group, const char *GroupName, const char *Owner, HashMaps * users);

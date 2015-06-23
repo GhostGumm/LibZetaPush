@@ -2,6 +2,7 @@
 #include <stdio.h>
 #include <unistd.h>
 
+#include "listingEntryInfo.h"
 #include "HashMaps.h"
 #include "messageEntryInfo.h"
 

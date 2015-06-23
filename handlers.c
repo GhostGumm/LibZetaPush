@@ -9,6 +9,8 @@
 #include "HashMaps.h"
 #include "messageEntryInfo.h"
 #include "stackListenerInfo.h"
+#include "groupUsersInfo.h"
+#include "stackListingInfo.h"
 
 bool            macro_call_handler(cometd_client_t *client, cometd_message *message)
 {
@@ -24,8 +26,7 @@ bool            group_del_user_handler(cometd_client_t *client, cometd_message *
 
 bool            group_del_users_handler(cometd_client_t *client, cometd_message *message)
 {
-  printf("Users deleted successfuly\n");
-  
+  printf("Users deleted successfuly\n");  
   return (true);
 }
 
@@ -56,7 +57,6 @@ bool group_error_handler(cometd_client_t *client, cometd_message *message)
 bool group_grant_handler(cometd_client_t *client, cometd_message *message)
 {
   printf("Access rights granted\n");
-
   return(true);
 }
 

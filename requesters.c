@@ -18,7 +18,7 @@ json_t  *init_macro_call_data(char *name, HashMaps *params)
   return (root);
 }
 
-json_t  *init_groups_mygroups_data(char *owner)
+json_t  *init_groups_mygroups_data(const char *owner)
 {
   json_t *root = json_object();
 

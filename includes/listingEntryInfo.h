@@ -4,9 +4,6 @@
 
 #include <stdbool.h>
 #include "comet_message.h"
-#include "my_hash.h"
-#include "my_DArray.h"
-#include "bstrlib.h"
 #include "hashMaps.h"
 
 typedef struct  _FolderListing    FolderListing;

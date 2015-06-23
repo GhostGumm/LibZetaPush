@@ -1,14 +1,11 @@
-CC	=	gcc -arch x86_64 -g3 -I../includes  -I/usr/local/Cellar/jansson/2.7/include -I/usr/local/lib -lcurl -I/usr/local/include -I./Zeta_map -I./Zeta_map/bstring
+CC	=	gcc -arch x86_64 -g3 -I../includes  -I/usr/local/Cellar/jansson/2.7/include -I/usr/local/lib -lcurl -I/usr/local/include
+
+
 
 SRC	=	../*.c\
-		../listingEntryInfo.c\
-		./Zeta_map/my_hash.c\
-                ./Zeta_map/my_DArray.c\
-                ./Zeta_map/bstring/bstrlib.c\
 
 CFLAGS	=	`pkg-config --cflags --libs jansson` `pkg-config --cflags --libs nopoll`
 
 
 all:
-	$(CC) $(SRC) $(CFLAGS)
-
+	$(CC) $(CFLAGS) $(SRC) -Wall

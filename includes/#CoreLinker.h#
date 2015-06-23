@@ -2,6 +2,7 @@
 #define _CoreLinker_H_
 
 #include "cometd_internal.h"
+#include ""
 #include "zetaclient.h"
 #include "listingEntryInfo.h"
 #include "ListingGdaInfo.h"

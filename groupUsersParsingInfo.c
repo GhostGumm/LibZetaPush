@@ -1,4 +1,5 @@
 #include "groupUsersInfo.h"
+#include "listingEntryInfo.h"
 
 void	users_json_object(json_t *element, int indent, GroupUsers **ls) {
   size_t size;
