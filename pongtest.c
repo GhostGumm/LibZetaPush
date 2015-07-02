@@ -1,5 +1,6 @@
 #include <jansson.h>
 
+#include "2046.h"
 #include "cometd_internal.h"
 #include "zetaclient.h"
 #include "listingEntryInfo.h"
@@ -14,10 +15,17 @@
 #include "handler.h"
 #include "CommandParsingInfo.h"
 
+#define _XOPEN_SOURCE 500
+
+uint32_t score;
+uint8_t scheme;
+uint8_t board[SIZE][SIZE];
+
 /*#pong*/
 
 zeta_handshake_manager_t * hr;
 zeta_client_t * cr;
+char c;
 
 OwnerRessource*  fillRessource()
 {
@@ -95,10 +103,10 @@ bool execute_callback(cometd_client_t *client, cometd_message *message)
 
 bool comand_callback(cometd_client_t *client, cometd_message *message)
 {
-  char *c;
-  c =  CommandParsinginfo(message);
-  start_game(c[0]);
-  return (true);
+  char *cc;
+  cc =  CommandParsinginfo(message);
+  c = cc[0];
+  return (false);
 }
 
 bool ping_callback(cometd_client_t *client, cometd_message *message)
@@ -142,7 +150,6 @@ int main(int argc, char** argv) {
   const char * game = "";
   HashMaps *data = HashMapInit();
   
-  signal(SIGINT, signal_callback_handler);
   
   initBoard(board);
   setBufferedInput(false);
@@ -154,6 +161,7 @@ int main(int argc, char** argv) {
 		zeta_handshake_manager_t * hm = zeta_create_mem_handshake_manager(businessId, deploymentId, login, password);
 		hr = hm;
 		zeta_client_t * client = zeta_create_client(server, cometd_create_long_polling_transport(), businessId, hm, "resource1");
+
 		cr = client;
 		if (client) {
 		  printf("client created\n");
@@ -161,25 +169,82 @@ int main(int argc, char** argv) {
 		  cometd_channel_subscribe(client->cometClient, comand_callback, "/service/GmY-HuzW/2v_u/command");
 		  cometd_channel_subscribe(client->cometClient, ping_callback, "/service/GmY-HuzW/2v_u/ping");
 	      
-		  //cometd_channel_subscribe(client->cometClient, comand_callback, "/service/GmY-HuzW/2v_u/command");
 		  int i = 0;
+		  /*----- Game init  -----*/
+		  bool success;
+		  uint8_t board[SIZE][SIZE];
+		  //signal(SIGINT, signal_callback_handler);		    
+		  initBoard(board);
+		  setBufferedInput(false);
+		  //char cr;
+		  c = 68;
+		  
+		  /*----------------------*/
+		  
 		  if (!zeta_handshake(client)) {
 		    printf("cometd_handshake OK\n");
 		    cometd_client_impl* cli = (cometd_client_impl*)client->cometClient;
 		    while (!cometd_main_loop(client->cometClient)) {
 		      puts("---------Echo request---------");
-		      //cometd_ping_request(client->cometClient, hm, groupe, "Game");
-		      //cometd_execute_request();
-		      puts("---------Echo Request---------");
-		      //printf("cometd_main_loop OK\n");
-		      //if (!(i++ % 10))
-		      //cometd_send_chat_message(client, "this is a chat message", buddy);
-		      if (i == 25)
-			cometd_disconnect(client->cometClient);
-		    }	
-		  }else
-		    printf("cometd_handshake failed\n");
-		}
+
+
+		      switch(c) {
+		      case 97:// 'a' key
+		      case 104:// 'h' key
+		      case 68:// left arrow
+			success = moveLeft(board);  break;
+		      case 100:// 'd' key
+		      case 108:// 'l' key
+		      case 67:// right arrow
+			success = moveRight(board); break;
+		      case 119:// 'w' key
+		      case 107:// 'k' key
+		      case 65:// up arrow
+			success = moveUp(board);    break;
+		      case 115:// 's' key
+		      case 106:// 'j' key
+		      case 66:// down arrow
+			success = moveDown(board);  break;
+		      default: success = false;
+		      }
+		      if (success) {
+			drawBoard(board);
+			usleep(150000);
+			addRandom(board);
+			drawBoard(board);
+			if (gameEnded(board)) {
+			  printf("         GAME OVER          \n");
+			  break;
+			}
+		      }
+		      if (c=='q') {
+			printf("        QUIT? (y/n)         \n");
+			if (c=='y') {
+			  break;
+			}
+			drawBoard(board);
+		      }
+		      if (c=='r') {
+			printf("       RESTART? (y/n)       \n");
+			if (c=='y') {
+			  initBoard(board);
+			}
+			drawBoard(board);
+		      }
+		    }
+		    setBufferedInput(true);
+		    printf("\e[?25h\e[m");		    
+		    //return EXIT_SUCCESS;	       		      
+		    
+		    puts("---------Echo Request---------");
+		    //printf("cometd_main_loop OK\n");
+		    //if (!(i++ % 10))
+		    //cometd_send_chat_message(client, "this is a chat message", buddy);
+		    if (i == 25)
+		      cometd_disconnect(client->cometClient);
+		  }
+		}else
+		  printf("cometd_handshake failed\n");
 	}
 	return 0;
 }

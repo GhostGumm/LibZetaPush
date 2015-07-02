@@ -143,7 +143,7 @@ bool execute_callback(cometd_client_t *client, cometd_message *message)
 {
   printf("execute callback\n\n\n");
   
-  exit(0);
+  return (false);
 }
 
 bool comand_callback(cometd_client_t *client, cometd_message *message)

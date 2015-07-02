@@ -38,7 +38,7 @@ void	command_json_array(json_t *element, int indent, const char *key) {
   size_t size = json_array_size(element);
 
   print_json_indent(indent);
-  printf("JSON Array of %ld element%s:\n", size, json_plural_size(size));
+  printf("JSON Array of %ld elements", size);
   for (i = 0; i < size; i++) {
     command_type(json_array_get(element, i), indent + 2,  key);
   }

@@ -9,12 +9,13 @@
 #include <time.h>
 #include <signal.h>
 
+#include "2046.h"
+
 #define SIZE 4
-uint32_t score=0;
-uint8_t scheme=0;
+uint32_t score;
+uint8_t scheme;
 uint8_t board[SIZE][SIZE];
-char c;
-bool success;
+
 
 
 void getColor(uint8_t value, char *color, size_t length) {
@@ -352,10 +353,12 @@ void signal_callback_handler(int signum) {
   printf("\e[?25h\e[m");
   exit(signum);
 }
+/*
+int main(int argc, char *argv[]) {
+  char c;
+  bool success;
 
-int start(char d) {
-
-  /*if (argc == 2 && strcmp(argv[1],"test")==0) {
+  if (argc == 2 && strcmp(argv[1],"test")==0) {
     return test();
   }
   if (argc == 2 && strcmp(argv[1],"blackwhite")==0) {
@@ -363,16 +366,13 @@ int start(char d) {
   }
   if (argc == 2 && strcmp(argv[1],"bluered")==0) {
     scheme = 2;
-    }*/
+  }
 
   printf("\e[?25l\e[2J");
 
   // register signal handler for when ctrl-c is pressed
-  /*  signal(SIGINT, signal_callback_handler);
-
-  initBoard(board);
-  setBufferedInput(false);*/
-    c=d;
+  while (true) {
+    c=getchar();
     switch(c) {
     case 97:// 'a' key
     case 104:// 'h' key
@@ -392,7 +392,6 @@ int start(char d) {
       success = moveDown(board);  break;
     default: success = false;
     }
-    
     if (success) {
       drawBoard(board);
       usleep(150000);
@@ -400,14 +399,14 @@ int start(char d) {
       drawBoard(board);
       if (gameEnded(board)) {
 	printf("         GAME OVER          \n");
-	exit(0);
+	break;
       }
     }
     if (c=='q') {
       printf("        QUIT? (y/n)         \n");
       c=getchar();
       if (c=='y') {
-	exit(0);
+	break;
       }
       drawBoard(board);
     }

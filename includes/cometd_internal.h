@@ -70,18 +70,18 @@ typedef struct {
 
 // traces. '__func__' is C99 compliant
 #define DEBUG
-#ifdef DEBUG
-#include <time.h>
+  #ifdef DEBUG
+  #include <time.h>
 #define printtime {time_t rawtime;char __cmtd_buf_time[80];struct tm * timeinfo;time ( &rawtime );timeinfo = localtime ( &rawtime );strftime (__cmtd_buf_time,80,"%X ",timeinfo);printf ("%s", __cmtd_buf_time);}
-#define CMTD_TRACE_IN static int __cmtd_counter=0;const int __cmtd_counter_current=__cmtd_counter++;printtime;printf(__func__ );printf(" IN %d\n", __cmtd_counter_current); 
+#define CMTD_TRACE_IN static int __cmtd_counter=0;const int __cmtd_counter_current=__cmtd_counter++;printtime;printf(__func__ );printf(" IN %d\n", __cmtd_counter_current);
 #define CMTD_TRACE_DEBUG(...) printtime;printf(__func__ );printf(" DEBUG "); printf(__VA_ARGS__);
 #define CMTD_OUT __cmtd_counter--;printtime;printf(__func__ );printf(" OUT %d\n", __cmtd_counter_current);
 #define CMTD_TRACE_OUT CMTD_OUT;
 #define CMTD_RETURN(VAL) CMTD_OUT; return (VAL);
-#else
-#define CMTD_TRACE_IN
-#define CMTD_TRACE_DEBUG(...) 
-#define CMTD_TRACE_OUT
+  #else
+  #define CMTD_TRACE_IN
+#define CMTD_TRACE_DEBUG(...)
+  #define CMTD_TRACE_OUT
 #define CMTD_RETURN(VAL) return (VAL);
 #endif
 
