@@ -165,6 +165,74 @@ char*    concate_ids2channel(const char* bId, const char* SDepId, char* option)
   return (channel);
 }
 
+bool    cometd_execute_request(cometd_client_t *client, zeta_handshake_manager_t *hm, char *SDepId, char *cmd, HashMaps *data, char *from, char *fromRes, char *owner, char *resource)
+{  
+  CMTD_TRACE_IN
+    CALLOC(cometd_message, message);
+  cometd_client_impl* cli = (cometd_client_impl*)client;
+  static int id;
+  char *str = malloc(sizeof(str));
+  sprintf(str, "%d", id++);
+
+  message->id = str;
+  message->channel = concate_ids2channel(hm->businessId, SDepId, "execute");
+  message->clientId = cli->clientId;
+  message->data = init_execute_data(cmd, data, from, fromRes, owner, resource);
+  client->transport->sender(client->transport, message, client, true);
+  CMTD_RETURN(false);  
+}
+
+bool    cometd_pong_request(cometd_client_t *client, zeta_handshake_manager_t *hm, char *SDepId, char *action, bool avaible, char *owner, char *ressource, char *uid, char *user)
+{
+  CMTD_TRACE_IN
+    CALLOC(cometd_message, message);
+  cometd_client_impl* cli = (cometd_client_impl*)client;
+  static int id;
+  char *str = malloc(sizeof(str));
+  sprintf(str, "%d", id++);
+  
+  message->id = str;
+  message->channel = concate_ids2channel(hm->businessId, SDepId, "pong");
+  message->clientId = cli->clientId;
+  message->data = init_pong_data(action, avaible, owner, ressource, uid, user);
+  client->transport->sender(client->transport, message, client, true);
+  CMTD_RETURN(false);  
+}
+
+bool    cometd_ping_request(cometd_client_t *client, zeta_handshake_manager_t *hm, char *SDepId, char *action)
+{
+  CMTD_TRACE_IN
+    CALLOC(cometd_message, message);
+  cometd_client_impl* cli = (cometd_client_impl*)client;
+  static int id;
+  char *str = malloc(sizeof(str));
+  sprintf(str, "%d", id++);
+
+  message->id = str;
+  message->channel = concate_ids2channel(hm->businessId, SDepId, "ping");
+  message->clientId = cli->clientId;
+  message->data = init_ping_data(action);
+  client->transport->sender(client->transport, message, client, true);
+  CMTD_RETURN(false);
+}
+
+bool    cometd_game_request(cometd_client_t *client, zeta_handshake_manager_t *hm, char *SDepId)
+{
+  CMTD_TRACE_IN
+    CALLOC(cometd_message, message);
+  cometd_client_impl* cli = (cometd_client_impl*)client;
+  static int id;
+  char *str = malloc(sizeof(str));
+  sprintf(str, "%d", id++);
+
+  message->id = str;
+  message->channel = concate_ids2channel(hm->businessId, SDepId, "game");
+  message->clientId = cli->clientId;
+  message->data = init_game_data();
+  client->transport->sender(client->transport, message, client, true);
+  CMTD_RETURN(false);
+}
+
 bool    cometd_macro_call_request(cometd_client_t *client, zeta_handshake_manager_t *hm, const char *SDepId, char *name, HashMaps *param)
 {
   CMTD_TRACE_IN

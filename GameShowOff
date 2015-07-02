@@ -1,0 +1,48 @@
+#include <curses.h>
+
+
+int rmax, cmax;
+
+void draw(char dc, int r, int c)
+{
+  if (r &gt; rmax || c &gt; cmax) return;
+  move(r, c);
+  delch();
+  insch(dc);
+  refresh();
+}
+
+void drawarrow(int r) {
+  int ri, ci;
+  int c = cmax - 4;
+  for (ci = c; ci &lt; c + 4; ci++) {
+    for (ri = r - (ci - c); ri &lt;= r + (ci - c); ri++) {
+      if (ri == r) continue;
+      draw('*', ri, ci);
+    }
+  }
+}
+
+int main() {
+  char d;
+  WINDOW *wnd;
+
+  wnd = initscr();
+  cbreak();
+  noecho();
+  curs_set(0);
+  getmaxyx(wnd, rmax, cmax);
+  clear();
+  refresh();
+  ar = rmax / 2;
+  while (1) {
+    d = getch();
+    if (d == 'q') break;
+		    if (d == 'j') ar++;
+    if (d == 'k') ar--;
+    clear();
+    drawarrow(ar);
+  }
+  endwin();
+}
+

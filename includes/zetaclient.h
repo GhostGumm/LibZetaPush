@@ -31,7 +31,7 @@ typedef struct zeta_client {
 /* connection */
 zeta_handshake_manager_t * zeta_create_handshake_manager(const char * businessId, const char * deploymentId, const char * authType, const char * authVersion, zeta_handshake_fields handshakeFields);
 zeta_handshake_manager_t * zeta_create_mem_handshake_manager(const char * businessId, const char * deploymentId, const char * login, const char * password);
-zeta_client_t * zeta_create_client(const char * serverUrl, cometd_transport_t * transport, const char * businessId, zeta_handshake_manager_t * handshakeManager);
+  zeta_client_t * zeta_create_client(const char * serverUrl, cometd_transport_t * transport, const char * businessId, zeta_handshake_manager_t * handshakeManager, const char *resource);
 bool zeta_handshake(zeta_client_t * client);
 
 

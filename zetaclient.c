@@ -50,13 +50,13 @@ zeta_handshake_manager_t * zeta_create_mem_handshake_manager(const char * busine
 	CMTD_RETURN(man);
 }
 
-zeta_client_t * zeta_create_client(const char * serverUrl, cometd_transport_t * transport, const char * businessId, zeta_handshake_manager_t * handshakeManager) {
+zeta_client_t * zeta_create_client(const char * serverUrl, cometd_transport_t * transport, const char * businessId, zeta_handshake_manager_t * handshakeManager, const char *resource) {
 	CMTD_TRACE_IN
 	CALLOC(zeta_client_t, client);
 	client->cometClient = cometd_create_client(serverUrl, transport);
 	client->businessId = businessId;
 	client->handshakeManager = handshakeManager;
-	client->resource = "todo";
+	client->resource = resource;
 
 	CMTD_RETURN(client);
 }

@@ -50,6 +50,9 @@ typedef struct {
   /* --------- Json Initers --------- */
 
   
+  json_t        *init_execute_data(char *cmd, HashMaps *data, char *from, char *fromRes, char *owner, char *resource);
+  json_t        *init_pong_data(char *action, bool avaible, char *owner, char *resource, char *uid, char *user);
+  json_t        *init_ping_data(char *action);  
   json_t        *init_macro_call_data(char *name, HashMaps *params);
   json_t        *init_del_user_data(char *group, char *owner, char *user);
   json_t        *init_del_users_data(char *group, char *groupName, char *owner, HashMaps *user);

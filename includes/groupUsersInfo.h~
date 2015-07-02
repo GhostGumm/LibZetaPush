@@ -1,7 +1,0 @@
-#ifndef GROUP_USERS_INFO
-#define  GROUP_USERS_INFO
-
-#include <jansson.h>
-
-
-

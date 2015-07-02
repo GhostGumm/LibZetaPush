@@ -234,8 +234,8 @@ GdaPut   *GdaPutParsingInfo(cometd_message *message)
   json_t* source = message->source;
   GdaPut *gda = InitPutGda(gda);
   GdaPut **Gda = &gda;
-
+  
   check_put_type(source, 1, Gda, key);
-
+  
   return ((*Gda));
 }

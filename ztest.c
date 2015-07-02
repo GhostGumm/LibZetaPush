@@ -1,3 +1,14 @@
+#include <jansson.h>
+#include <string.h>
+#include <termios.h>
+#include <unistd.h>
+#include <sys/types.h>
+#include <sys/uio.h>
+
+//#include <ncurses.h>
+//#include <curses.h>
+//#include <term.h>
+#include "glut.h"
 #include "cometd_internal.h"
 #include "zetaclient.h"
 #include "listingEntryInfo.h"
@@ -11,48 +22,55 @@
 #include "queueInfo.h"
 #include "handler.h"
 
-/* !!!!!!! Important read this and you will find the light at the end of the tunnel. Don't do cross reading you little monkey :3 !!!!!!!!
-   
-  These callbacks below can have any given name as long as you have declared it in the :
-  ** cometd_channel_subscribe(client->cometClient, Here ----> ls_redirection_handler <---- Here, "/service/GmY-HuzW/2vC3/ls");
-  or other example  : 
-  ** cometd_channel_subscribe(client->cometClient, Here ----> iLoveCookies <---- Here, "/service/GmY-HuzW/2vC3/ls");
-  It will be called by the engine no problem.
-  It is better then to put the scope as a Forward Declaration to not have : "implicit declaration" Warnings.
-  Your scope will allways take as parameters a : 
-  -> cometd_client_t *client
-  and a :
-  -> cometd_message *message
-  also returning a : -> bool
-  For example : 
-  ** Forward declaration : 
-    bool iloveCookies(cometd_client_t *client, cometd_message *message);
-  ** Actual callBack definition to execute code :
-    bool iloveCookies(cometd_client_t *client, cometd_message *message)
-    {
-      Code here
-    }
+/*#PING*/
 
-   Depending on what request you had sent, you want to call to according JsonParsing function.
-   For Example i want to perform a ls command on my Zpfs server on the folder "/" were all my cookies pics are stored :
-   
-   - I set the callback name : 
-   ** cometd_channel_subscribe(client->cometClient, iLoveCookies, "/service/GmY-HuzW/2vC3/ls");
-   - I set the ForwardDeclaration :
-   ** bool iloveCookies(cometd_client_t *client, cometd_message *message);
-   - I open my function and call the right ls parsing function :
-   **     bool iloveCookies(cometd_client_t *client, cometd_message *message)
-          {
-	   FolderListing *result = FolderParsingInfo(message); <-- Parsing Function	  
-	   -> You code here <-
-	   return (true); <-- to ensure the engine that the parsing went flowless, if it doesn't you will crash (and it will be your fault, shame on you !!) so no need to if/else, but it very rarely do so.
-	  }
-   - Then you will find the result of the parsing in *result. Easy isn't it :).
-   You are all set up now :) all the examples are shown below. Refer to the documentation for further information.
-   
-   Thank you for reading this and enjoy.
-   Kind Cookies, Hakimu jungulu.
-*/
+#define DELAY 50
+
+zeta_handshake_manager_t * hr;
+zeta_client_t * cr;
+
+
+static struct termios old, new;
+
+/* Initialize new terminal i/o settings */
+void initTermios(int echo)
+{
+  tcgetattr(0, &old); /* grab old terminal i/o settings */
+  new = old; /* make new settings same as old settings */
+  new.c_lflag &= ~ICANON; /* disable buffered i/o */
+  new.c_lflag &= echo ? ECHO : ~ECHO; /* set echo mode */
+  tcsetattr(0, TCSANOW, &new); /* use these new terminal i/o settings now */
+}
+
+/* Restore old terminal i/o settings */
+void resetTermios(void)
+{
+  tcsetattr(0, TCSANOW, &old);
+}
+
+/* Read 1 character - echo defines echo mode */
+char getch_(int echo)
+{
+  char ch;
+  initTermios(echo);
+  ch = getchar();
+  resetTermios();
+  return ch;
+}
+
+/* Read 1 character without echo */
+char getch(void)
+{
+  return getch_(0);
+}
+
+/* Read 1 character with echo */
+char getche(void)
+{
+  return getch_(1);
+}
+
+
 
 OwnerRessource*  fillRessource()
 {
@@ -116,76 +134,110 @@ HashMaps   *fillMap()
   return (list);
 }
 
+const char *  parse_game(json_t *source)
+{
+  return (json_string_value(json_object_get(source, "next_move")));
+}
+
+bool execute_callback(cometd_client_t *client, cometd_message *message)
+{
+  printf("execute callback\n\n\n");
+  
+  exit(0);
+}
+
+bool comand_callback(cometd_client_t *client, cometd_message *message)
+{
+  printf("command callback\n");
+  
+  exit (0);
+}
+
+bool ping_callback(cometd_client_t *client, cometd_message *message)
+{
+  printf("Ping callback lets pong : \n\n");
+  GdaParsingInfo(message);
+
+  cometd_pong_request(cr->cometClient, hr, "2v_u", "Game", true, "ShDmD1_ZFwNnmmjLxJCroA", "resource1", "uid", "ShDmD1_ZFwNnmmjLxJCroA");  
+  return false;
+}
+
+bool pong_callback(cometd_client_t *client, cometd_message *message)
+{
+  printf("It ponged well let's execute : \n\n");
+  
+  GdaParsingInfo(message);
+
+  return false;
+}
+
+
 int main(int argc, char** argv) {
   
-	int argn = 1;
-	const char * server = "http://m.zpush.ovh:8080/str/strd";
-	const char * login = "test2";
-	const char * resource = "zetaTuto";
-	const char * businessId = "GmY-HuzW";
-	const char * deploymentId = "KZyH";
-	const char * Zpfs = "p8qU";
-	const char * gda  = "IFa0";
-	const char * echo = "w3FQ";
-	const char * Zpfs2 = "9LDy";
-	const char * Zpfs3 = "2vC3";
-	const char * password = "password";
-	const char * msging = "RSVu";
-	const char * stackId  = "cKXj";
-	const char * remoteId = "";
-	const char * queueId = "aHqx";
-	const char * groupe = "2v_u";
-	const char * macro = "57C3";
+  int argn = 1;
+  char c;
+  char *toto = malloc(sizeof(char *) + 4);
+  
+  const char * server = "http://m.zpush.ovh:8080/str/strd";
+  const char * login = "test2";
+  const char * resource = "zetaTuto";
+  const char * businessId = "GmY-HuzW";
+  const char * deploymentId = "KZyH";
+  const char * Zpfs = "p8qU";
+  const char * gda  = "IFa0";
+  const char * echo = "w3FQ";
+  const char * Zpfs2 = "9LDy";
+  const char * Zpfs3 = "2vC3";
+  const char * password = "password";
+  const char * msging = "RSVu";
+  const char * stackId  = "cKXj";
+  const char * remoteId = "";
+  const char * queueId = "aHqx";
+  const char * groupe = "2v_u";
+  const char * macro = "57C3";
+  const char * game = "";
+  char  buff[4096];
+  HashMaps *data = HashMapInit();
+  
 	
 	printf("Starting test program for user %s and resource %s\n", login, resource);
 	if (cometd_init()) {
 		printf("cometd_init failed\n");
 	} else {
-		zeta_handshake_manager_t * hm = zeta_create_mem_handshake_manager(businessId, deploymentId, login, password);
-		zeta_client_t * client = zeta_create_client(server, cometd_create_long_polling_transport(), businessId, hm);		
-		if (client) {
-		  printf("client created\n");
-		  cometd_channel_subscribe(client->cometClient, macro_call_handler, "/service/GmY-HuzW/57C3/call");
-		  cometd_channel_subscribe(client->cometClient, group_del_user_handler, "/service/GmY-HuzW/2v_u/delUser");
-		  cometd_channel_subscribe(client->cometClient, my_groups_handler, "/service/GmY-HuzW/2v_u/myGroups");
-		  //cometd_channel_subscribe(client->cometClient, group_list_grant_handler, "/service/GmY-HuzW/2v_u/listGrants");
-		  //cometd_channel_subscribe(client->cometClient, group_grant_handler,  "/service/GmY-HuzW/2v_u/grant");
-		  //cometd_channel_subscribe(client->cometClient, group_del_user_handler, "/service/GmY-HuzW/2v_u/delGroup");
-		  cometd_channel_subscribe(client->cometClient, group_add_users_handler, "/service/GmY-HuzW/2v_u/addUser");
-		  cometd_channel_subscribe(client->cometClient, group_users_handler, "/service/GmY-HuzW/2v_u/groupUsers");
-		  //cometd_channel_subscribe(client->cometClient, group_create_handler, "/service/GmY-HuzW/2v_u/createGroup");
-		  //cometd_channel_subscribe(client->cometClient, all_groups_handler, "/service/GmY-HuzW/2v_u/allGroups");
-		  //cometd_channel_subscribe(client->cometClient, add_me_handler, "/service/GmY-HuzW/2v_u/error");
-		  //cometd_channel_subscribe(client->cometClient, add_me_handler, "/service/GmY-HuzW/2v_u/addMe");
-			int i = 0;
-			if (!zeta_handshake(client)) {
-			  printf("cometd_handshake OK\n");
-			  cometd_client_impl* cli = (cometd_client_impl*)client->cometClient;
-			  while (!cometd_main_loop(client->cometClient)) {
-			    puts("---------Echo request---------");
-			    cometd_macro_call_request(client->cometClient, hm, macro, "add", fillMap());
-			    cometd_my_groups_request(client->cometClient, hm, groupe, cli->userId);
-			    //cometd_group_del_users_request(client->cometClient, hm, groupe, "firstgroup", "firstgroup", cli->userId, fillUsers());
-			    //cometd_group_del_user_request(client->cometClient, hm, groupe, "firstgroup", cli->userId, "tfXrOlDf9CYWF88akl73Lg");
-			    //cometd_group_revoke_and_grant_request(client->cometClient, hm, groupe, "revoke", "zetagroup", "", "none", true);
-			    //cometd_group_list_grant_request(client->cometClient, hm, groupe, fillActions(), "zetagroup", "", "none", true);
-			    //cometd_group_revoke_and_grant_request(client->cometClient, hm, groupe, "revoke", "zetagroup", "", "none", true);
-			    //cometd_group_revoke_and_grant_request(client->cometClient, hm, groupe, "grant", "zetagroup", "", "none", false);
-			    //cometd_group_del_request(client->cometClient, hm, groupe, "zetagroup", "");
-			    //cometd_group_add_users_request(client->cometClient, hm, groupe, "firstgroup", "firstgroup", cli->userId, fillUsers());			    
-			    //cometd_group_users_request(client->cometClient, hm, groupe, "firstgroup");
-			    //cometd_group_create_request(client->cometClient, hm, groupe, "firstgroup", "firstgroup");
-			    //cometd_all_groups_request(client->cometClient, hm, groupe, "mikael");
-			    //cometd_add_me_request(client->cometClient, hm, groupe, "Groupe", "mikael", "toto");
-			    puts("---------Echo Request---------");
-			    //printf("cometd_main_loop OK\n");
-			    //if (!(i++ % 10))
-			    //cometd_send_chat_message(client, "this is a chat message", buddy);
-			    if (i == 25)
-				    cometd_disconnect(client->cometClient);
-				}	
-			}else
-				printf("cometd_handshake failed\n");
+	  zeta_handshake_manager_t * hm = zeta_create_mem_handshake_manager(businessId, deploymentId, login, password);
+	  hr = hm;
+	  zeta_client_t * client = zeta_create_client(server, cometd_create_long_polling_transport(), businessId, hm, "resource0");
+	  cr = client;
+	  if (client) {
+	    printf("client created\n");
+		  cometd_channel_subscribe(client->cometClient, execute_callback, "/service/GmY-HuzW/2v_u/execute");
+		  cometd_channel_subscribe(client->cometClient, pong_callback, "/service/GmY-HuzW/2v_u/pong");
+	      
+		  //cometd_channel_subscribe(client->cometClient, comand_callback, "/service/GmY-HuzW/2v_u/command");
+		  if (!zeta_handshake(client)) {
+		    printf("cometd_handshake OK\n");
+		    cometd_client_impl* cli = (cometd_client_impl*)client->cometClient;
+		    int prev = 0;
+		    while (!cometd_main_loop(client->cometClient)) {
+		      puts("---------Echo request---------");
+		      c = getche();
+			
+		      printf("character = %c\n", c);
+		      toto[0] = c;
+		      cometd_execute_request(cr->cometClient, hm, "2v_u" , toto, fillMap(), "ShDmD1_ZFwNnmmjLxJCroA", "resource0","ShDmD1_ZFwNnmmjLxJCroA", "resource1");
+			  
+			
+		      //cometd_execute_request(cr->cometClient, hm, "2v_u" , toto, fillMap(), "ShDmD1_ZFwNnmmjLxJCroA", "resource0","ShDmD1_ZFwNnmmjLxJCroA", "resource1");
+
+		      puts("---------Echo Request---------");
+		      //printf("cometd_main_loop OK\n");
+		      //if (!(i++ % 10))
+		      //cometd_send_chat_message(client, "this is a chat message", buddy);
+		      //if (i == 25)
+		      //cometd_disconnect(client->cometClient);
+		    }	
+		  }else
+		    printf("cometd_handshake failed\n");
 		}
 	}
 	return 0;

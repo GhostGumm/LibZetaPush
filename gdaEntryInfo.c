@@ -54,13 +54,13 @@ GdaList*     InitGda(GdaList *init)
   return (init);
 }
 
-void	handle_json_null(json_t *element, int indent, GdaList **gda) {
+void handle_json_null(json_t *element, int indent, GdaList **gda) {
   (void)element;
   print_json_indent(indent);
   printf("JSON Null\n");
 }
 
-void	handle_json_object(json_t *element, int indent, GdaList **gda) {
+void handle_json_object(json_t *element, int indent, GdaList **gda) {
   size_t size;
   const char *key;
   json_t *value;
@@ -77,7 +77,7 @@ void	handle_json_object(json_t *element, int indent, GdaList **gda) {
 
 }
 
-void	handle_json_array(json_t *element, int indent, GdaList **gda, const char *key) {
+void  handle_json_array(json_t *element, int indent, GdaList **gda, const char *key) {
   size_t i;
   size_t size = json_array_size(element);
 

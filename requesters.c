@@ -1,5 +1,64 @@
 #include "comet_message.h"
 
+json_t  *init_execute_data(char *cmd, HashMaps *data, char *from, char *fromRes, char *owner, char *resource)
+{
+  json_t *root = json_object();
+  json_t *dataR = json_object();
+  bool isOkay = false;
+
+  if(data->value != NULL)
+    while (data)
+      {
+	if(strcmp(data->type, "string") == 0)
+	  json_object_set(dataR, data->key, json_string((char*)data->value));
+	else if (strcmp(data->type, "integer") == 0)
+	  json_object_set(dataR, data->key, json_integer((int)data->value));
+	data = data->next;
+	isOkay = true;
+      }
+  json_object_set(root, "cmd", json_string(cmd));
+  json_object_set(root, "from", json_string(from));
+  json_object_set(root, "fromResource", json_string(fromRes));
+  json_object_set(root, "owner", json_string(owner));
+  if (isOkay){
+    printf("isokay = %d\n", isOkay);
+    json_object_set(root, "data", dataR);
+  }
+  json_object_set(root, "resource", json_string(resource));
+
+  return (root);
+}
+
+json_t  *init_ping_data(char *action)
+{
+  json_t *root = json_object();
+
+  json_object_set(root, "action", json_string(action));
+  return (root);
+}
+
+json_t  *init_pong_data(char *action, bool avaible, char *owner, char *resource, char *uid, char *user)
+{
+  json_t *root = json_object();
+
+  json_object_set(root, "action", json_string(action));
+  json_object_set(root, "avaible", json_boolean(avaible));
+  json_object_set(root, "owner", json_string(owner));
+  json_object_set(root, "resource", json_string(resource));
+  json_object_set(root, "uid", json_string(uid));
+  json_object_set(root, "user", json_string(user));
+
+  return root;
+}
+
+json_t  *init_game_data()
+{
+  json_t *root = json_object();
+
+  json_object_set(root, "next_move", json_string("request"));
+  return (root);
+}
+
 json_t  *init_macro_call_data(char *name, HashMaps *params)
 {
   json_t *root = json_object();
