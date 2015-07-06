@@ -1,0 +1,2 @@
+gcc -Wall -fPIC -c ../*.c -I../include `pkg-config --cflags --libs jansson`
+ar rc libcomet.so *.o
