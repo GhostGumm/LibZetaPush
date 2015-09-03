@@ -20,7 +20,7 @@ Using The Library
 Using the ZetaIos Library is pretty straight.
 It sums up to 3 steps :
 
------------------ FIRST STEP ----------------- :
+#----------------- FIRST STEP ----------------- :
 
 In order to start the Client you have to initialize it with some basic informations about your account to let it procceed a complete and successfull handshake. To do so you only got to declare this method from the ZTCometClient class :
 
@@ -62,7 +62,7 @@ These ones are your login and password. Put them there as strings as well.
 
 Pretty easy isn't it :). Okay now let's start the Client.
 
------------------ SECOND STEP ----------------- :
+#----------------- SECOND STEP ----------------- :
 
 Now that you have provided enought informations to the client in order for it to proceed to handshake lets see how to start it up.
 
@@ -75,5 +75,5 @@ That's it, the client will query the server, configure it self automaticaly as w
 But if you send messages you will probably want to receive an answer, so lets start the Second Thread and get it over with configuration.
 
 
------------------ THIRD STEP ----------------- :
+#----------------- THIRD STEP ----------------- :
 
