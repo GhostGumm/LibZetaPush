@@ -1,9 +1,14 @@
-ZetaIos is a IOS CometD client Library that aims at making possible for ios users to easly communicate with ZetaPush CometD Servers.
+ZetaIos is a Multi Threaded IOS CometD client Library that aims at making possible for ios users to easly communicate with ZetaPush CometD Servers.
 
 The library have been coded in Objective-c under the 6.3.1 Xcode Version.
+
 The Project is linked with the "SystemConfiguration".Framework as well as the "Foundation".Framework. The few other external libraries are already implemented in the project in order to keep linking easy for any user who doesn't want to spend extra time fetching and scratching his head on versioning and linking.
 
-INSTALLATION :
+---------------------------------------------
+
+
+
+#----------------- INSTALLATION ----------------- :
 
 In order to install the library on your brand new Ios project, we give you two options :
 
@@ -15,10 +20,18 @@ In order to install the library on your brand new Ios project, we give you two o
 
 This will give you the access on the main Class wich connects all the other ones.
 
-Using The Library
+-------------------------------------------------
 
-Using the ZetaIos Library is pretty straight.
+##---------------- STARTUP --------------------- :
+
+Using the ZetaIos Library is pretty straight forward.
+
 It sums up to 3 steps :
+
+- 1 : Configuring the client
+- 2 : Starting the Outgoing and Incoming Thread and Queue
+- 3 : Using the Services
+
 
 #----------------- FIRST STEP ----------------- :
 
@@ -76,7 +89,11 @@ For this step all you have to do is declaring this method from the ZetaCometClie
 
 That's it, the client is now able to query the server, configure itself automaticaly, as well as starting the Outgoing Messages Thread and Queue to send messages from the client.
 
-But if you can send messages you will probably want to receive an answer, so lets start the Second Thread and get it over with configuration.
+Now that the client can send messages you will probably want to receive an answer, so lets start the Second Thread and get it over with configuration.
+
+For Twisted minds : You will probably ask your self, how this man can validate an handshake without being able to receive messages.
+
+I have only one answer : Magic... Or read the code and see what kind of sneaky bast**ds i'am.
 
 
 #----------------- THIRD STEP ----------------- :
@@ -97,7 +114,7 @@ Now that we are all set up, lets see how to call a service and use it.
 ************************
 ******* WARNING *********
 
-Do Not Call Any Service in the configuration steps this is a load phase no query should be triggerd ! (they will be stopped anyway)
+Do Not Call Any Service in the configuration steps this is a load phase, no Service should be triggered ! (they will be stopped anyway)
 
 EarlyBird messages are not supported anymore by the library, as they only lead to memory leaks and asynchonous problems.
 
@@ -109,8 +126,32 @@ _______________________________________________
 #----------------- SERVICES ----------------- :
 
 
+As i said earlier the library is very easy to use.
+
+To Trigger and send a Service you will have three steps to follow :
+
+- 1 : Open the ZetaPush General Technical Documentation on your browser and please read it. (You didn't see the RTFM coming huh ? :) )
+
+- 2 : If you are developping under Xcode, wich i think and hope is the case, you will have to invoke a service from the ZTCometClient class.
+      As the dunk man uses bottles to fight, the Druid nature to heal and the Mage Magic to blow things up, we will use the power of Xcode indexation to ease up the work.
+      
+      1 - First Ask your already initialized client variable to show what services are avaible. All services are prefixed by the "Invoke" Tag so type :
+      	  [m_client invoke]
+      	  Xcode will then show you all the avaible services, but i think you will find it very exhausting to read all the list and pick what you are looking for.
+
+      2 - To precisely find a service we will use the category we are looking for, for example we want something under the "S3" category, so all we have to do is specifing it :
+      	  [m_client invokeS3]
+      	  Xcode will then show us all the Services avaible for this particular category.
+
+      Now just pick the Service you want, like the "list" one and lets see how to fill in the informations.
+      
+- 3 : To be clear lets keep our invokeS3List service example :
 
 
+
+      
+
+     
 
 
 ----------------------------------------------
