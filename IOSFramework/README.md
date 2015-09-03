@@ -97,10 +97,20 @@ Now that we are all set up, lets see how to call a service and use it.
 ************************
 ******* WARNING *********
 
-Do Not Call Any Service in the configuration steps this is a load phase no query should be triggerd ! (they will be stop if you do so, and server will kick you out for a good moment)
+Do Not Call Any Service in the configuration steps this is a load phase no query should be triggerd ! (they will be stopped anyway)
+
 EarlyBird messages are not supported anymore by the library, as they only lead to memory leaks and asynchonous problems.
 
 ***********************
 
 _______________________________________________
 
+
+#----------------- SERVICES ----------------- :
+
+
+
+
+
+
+----------------------------------------------
