@@ -26,6 +26,7 @@ In order to start the Client you have to initialize it with some basic informati
 
  m_client = [[ZTCometClient alloc] initWithAllInfo:[NSURL URLWithString:@"http://m.zpush.ovh:8080/str/strd"] BusinessId:@"GmY-HuzW" DeployementId:@"KZyH" Login:@"test2" PassWord:@"password"];
 
+
 ****************************************
 ************* m_client  ****************
 
@@ -40,7 +41,9 @@ m_client is class variable wich i declared into my ViewController.h like so
 To put it private or public is up to you.
 ****************************************
 
-Lets cut this method into little pieces to reach a better understanding of it.
+
+
+But lets cut this method into little pieces to reach a better understanding of it.
 
 - First Parameter : [NSURL URLWithString:@"******"]
 
@@ -71,10 +74,33 @@ For this step all you have to do is declaring this method from the ZetaCometClie
 
 [m_client handshake];
 
-That's it, the client will query the server, configure it self automaticaly as well as starting a Thread to send messages from the client.
+That's it, the client is now able to query the server, configure itself automaticaly, as well as starting the Outgoing Messages Thread and Queue to send messages from the client.
 
-But if you send messages you will probably want to receive an answer, so lets start the Second Thread and get it over with configuration.
+But if you can send messages you will probably want to receive an answer, so lets start the Second Thread and get it over with configuration.
 
 
 #----------------- THIRD STEP ----------------- :
+
+The Third Step is as easy as the second one.
+
+To trigger the Incoming Messages Thread and Queue safely, all you have to do is declaring the following method from the ZetaCometClient class :
+
+[m_client scheduleInRunLoop:[NSRunLoop currentRunLoop] forMode:NSDefaultRunLoopMode];
+
+The RunLoop will start a silent Thread that will keep fetching for new messages coming from the server and hand them to you as soon as possible.
+
+
+We are now done for the configuration part. You can find an example given in the ViewController.m file under the viewDidLoad method. The file can be found in the TestAllRecode Project File.
+
+Now that we are all set up, lets see how to call a service and use it.
+
+************************
+******* WARNING *********
+
+Do Not Call Any Service in the configuration steps this is a load phase no query should be triggerd ! (they will be stop if you do so, and server will kick you out for a good moment)
+EarlyBird messages are not supported anymore by the library, as they only lead to memory leaks and asynchonous problems.
+
+***********************
+
+_______________________________________________
 
