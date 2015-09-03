@@ -7,14 +7,14 @@
 //
 
 #import "ViewController.h"
-#import "DDCometClient.h"
-#import "DDCometMessage.h"
-#import "DDCometLongPollingTransport.h"
-#import "DDCometMessage.h"
-#import "DDCometSubscription.h"
-#import "DDConcurrentQueue.h"
-#import "DDQueueProcessor.h"
-#import <DDGlobalCallbacks+DDGlobalCallbacks.h>
+#import "ZTCometClient.h"
+#import "ZTCometMessage.h"
+#import "ZTCometLongPollingTransport.h"
+#import "ZTCometMessage.h"
+#import "ZTCometSubscription.h"
+#import "ZTConcurrentQueue.h"
+#import "ZTQueueProcessor.h"
+#import <ZTGlobalCallbacks+ZTGlobalCallbacks.h>
 
 //launching threads
 //You can ask for an early service if you want it delivered as soon as the connect answer comes from server
@@ -29,7 +29,7 @@
 @end
 
 
-DDCometClient *client;
+ZTCometClient *client;
 
 @implementation ViewController
 
@@ -55,7 +55,7 @@ AnotherClassText = V_ACT;
     {
 #pragma GCC diagnostic ignored "-Wundeclared-selector"
         
-        m_client = [[DDCometClient alloc] initWithAllInfo:[NSURL URLWithString:@"http://m.zpush.ovh:8080/str/strd"] BusinessId:@"GmY-HuzW" DeployementId:@"KZyH" Login:@"test2" PassWord:@"password"];
+        m_client = [[ZTCometClient alloc] initWithAllInfo:[NSURL URLWithString:@"http://m.zpush.ovh:8080/str/strd"] BusinessId:@"GmY-HuzW" DeployementId:@"KZyH" Login:@"test2" PassWord:@"password"];
         
         [m_client handshake];
         
@@ -100,7 +100,7 @@ AnotherClassText = V_ACT;
 
 #pragma mark -
 
-- (void)cometClientHandshakeDidSucceed:(DDCometClient *)client
+- (void)cometClientHandshakeDidSucceed:(ZTCometClient *)client
 {
   /*  NSLog(@"Handshake succeeded");
     
@@ -113,32 +113,32 @@ AnotherClassText = V_ACT;
     //[m_client publishData:data toChannel:@"/service/GmY-HuzW/cKXj/list"];*/
 }
 
-- (void)cometClient:(DDCometClient *)client handshakeDidFailWithError:(NSError *)error
+- (void)cometClient:(ZTCometClient *)client handshakeDidFailWithError:(NSError *)error
 {
     NSLog(@"Handshake failed");
 }
 
-- (void)cometClientConnectDidSucceed:(DDCometClient *)client
+- (void)cometClientConnectDidSucceed:(ZTCometClient *)client
 {
     NSLog(@"Connect succeeded");
 }
 
-- (void)cometClient:(DDCometClient *)client connectDidFailWithError:(NSError *)error
+- (void)cometClient:(ZTCometClient *)client connectDidFailWithError:(NSError *)error
 {
     NSLog(@"Connect failed");
 }
 
-- (void)cometClient:(DDCometClient *)client subscriptionDidSucceed:(DDCometSubscription *)subscription
+- (void)cometClient:(ZTCometClient *)client subscriptionDidSucceed:(ZTCometSubscription *)subscription
 {
     NSLog(@"Subsription succeeded");
 }
 
-- (void)cometClient:(DDCometClient *)client subscription:(DDCometSubscription *)subscription didFailWithError:(NSError *)error
+- (void)cometClient:(ZTCometClient *)client subscription:(ZTCometSubscription *)subscription didFailWithError:(NSError *)error
 {
     NSLog(@"Subsription failed");
 }
 
-- (void)chatMessageReceived:(DDCometMessage *)message
+- (void)chatMessageReceived:(ZTCometMessage *)message
 {
    /* NSLog(@"Message-received");
     if (message.successful == nil)
@@ -147,7 +147,7 @@ AnotherClassText = V_ACT;
         [self appendText:@"Unable to send message"];*/
 }
 
-- (void)membershipMessageReceived:(DDCometMessage *)message
+- (void)membershipMessageReceived:(ZTCometMessage *)message
 {
     /*if ([message.data isKindOfClass:[NSDictionary class]])
         [self appendText:[NSString stringWithFormat:@"[%@ are in the chat]", [message.data objectForKey:@"user"]]];

@@ -1,13 +1,13 @@
 
 #import <Foundation/Foundation.h>
 
-@class DDGlobalCallbacks;
+@class ZTGlobalCallbacks;
 
-@interface DDCometMessage : NSObject
+@interface ZTCometMessage : NSObject
 
-- (id)initWithCallback:(DDGlobalCallbacks *)cb;
+- (id)initWithCallback:(ZTGlobalCallbacks *)cb;
 
-@property (nonatomic, retain)DDGlobalCallbacks *cback;
+@property (nonatomic, retain)ZTGlobalCallbacks *cback;
 @property (nonatomic, retain) NSString *channel;
 @property (nonatomic, retain) NSString *version;
 @property (nonatomic, retain) NSString *token;
@@ -33,13 +33,13 @@
 @property (nonatomic, retain) NSString *reco;
 
 
-+ (DDCometMessage *)messageWithChannel:(NSString *)channel;
++ (ZTCometMessage *)messageWithChannel:(NSString *)channel;
 
 @end
 
-@interface DDCometMessage (JSON)
+@interface ZTCometMessage (JSON)
 
-+ (DDCometMessage *)messageWithJson:(NSDictionary *)jsonData;
++ (ZTCometMessage *)messageWithJson:(NSDictionary *)jsonData;
 - (NSDictionary *)proxyForJson;
 
 @end

@@ -1,16 +1,16 @@
 
-#import "DDQueueProcessor.h"
+#import "ZTQueueProcessor.h"
 
 
-void DDQueueProcessorPerform(void *info);
+void ZTQueueProcessorPerform(void *info);
 
-@implementation DDQueueProcessor
+@implementation ZTQueueProcessor
 
-+ (DDQueueProcessor *)queueProcessorWithQueue:(id<DDQueue>)queue
++ (ZTQueueProcessor *)queueProcessorWithQueue:(id<ZTQueue>)queue
 									   target:(id)target
 									 selector:(SEL)selector
 {
-	DDQueueProcessor *processor = [[[DDQueueProcessor alloc] initWithTarget:target selector:selector] autorelease];
+	ZTQueueProcessor *processor = [[[ZTQueueProcessor alloc] initWithTarget:target selector:selector] autorelease];
 	[queue setDelegate:processor];
 	[processor scheduleInRunLoop:[NSRunLoop mainRunLoop] forMode:NSRunLoopCommonModes];
 	return processor;
@@ -26,7 +26,7 @@ void DDQueueProcessorPerform(void *info);
 		CFRunLoopSourceContext context =
 		{
 			0, self, NULL, NULL, NULL, NULL, NULL, NULL, NULL,
-			DDQueueProcessorPerform
+			ZTQueueProcessorPerform
 		};
 		
 		m_source = CFRunLoopSourceCreate(NULL, 0, &context);
@@ -57,7 +57,7 @@ void DDQueueProcessorPerform(void *info);
 	}
 }
 
-- (void)queueDidAddObject:(id<DDQueue>)queue
+- (void)queueDidAddObject:(id<ZTQueue>)queue
 {
 	CFRunLoopSourceSignal(m_source);
 	CFRunLoopWakeUp([m_runLoop getCFRunLoop]);
@@ -70,8 +70,8 @@ void DDQueueProcessorPerform(void *info);
 
 @end
 
-void DDQueueProcessorPerform(void *info)
+void ZTQueueProcessorPerform(void *info)
 {
-	DDQueueProcessor *processor = info;
+	ZTQueueProcessor *processor = info;
 	[processor makeTargetPeformSelector];
 }

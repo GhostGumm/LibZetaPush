@@ -1,5 +1,5 @@
-#import "DDCometMessage.h"
-#import "DDGlobalCallbacks+DDGlobalCallbacks.h"
+#import "ZTCometMessage.h"
+#import "ZTGlobalCallbacks+ZTGlobalCallbacks.h"
 
 @interface NSDate (ISO8601)
 
@@ -13,14 +13,14 @@
 + (NSDate *)dateWithISO8601String:(NSString *)string
 {
 	NSDateFormatter *fmt = [[[NSDateFormatter alloc] init] autorelease];
-	[fmt setDateFormat:@"yyyy-MM-dd'T'HH:mm:ss"];
+	[fmt setDateFormat:@"yyyy-MM-ZT'T'HH:mm:ss"];
 	return [fmt dateFromString:string];
 }
 
 - (NSString *)ISO8601Representation
 {
 	NSDateFormatter *fmt = [[[NSDateFormatter alloc] init] autorelease];
-	[fmt setDateFormat:@"yyyy-MM-dd'T'HH:mm:ss"];
+	[fmt setDateFormat:@"yyyy-MM-ZT'T'HH:mm:ss"];
 	return [fmt stringFromDate:self];
 }
 
@@ -53,7 +53,7 @@
 
 @end
 
-@implementation DDCometMessage
+@implementation ZTCometMessage
 
 @synthesize channel = m_channel,
     JsonBruteData = m_JsonData,
@@ -108,7 +108,7 @@
     [super dealloc];
 }
 
-- (id)initWithCallback:(DDGlobalCallbacks *)cb
+- (id)initWithCallback:(ZTGlobalCallbacks *)cb
 {
     if ((self = [super init]))
     {
@@ -118,21 +118,21 @@
     return self;
 }
 
-+ (DDCometMessage *)messageWithChannel:(NSString *)channel
++ (ZTCometMessage *)messageWithChannel:(NSString *)channel
 {
-	DDCometMessage *message = [[[DDCometMessage alloc] init] autorelease];
+	ZTCometMessage *message = [[[ZTCometMessage alloc] init] autorelease];
 	message.channel = channel;
 	return message;
 }
 
 @end
 
-@implementation DDCometMessage (JSON)
+@implementation ZTCometMessage (JSON)
 
-+ (DDCometMessage *)messageWithJson:(NSDictionary *)jsonData
++ (ZTCometMessage *)messageWithJson:(NSDictionary *)jsonData
 {
     
-	DDCometMessage *message = [[[DDCometMessage alloc] init] autorelease];
+	ZTCometMessage *message = [[[ZTCometMessage alloc] init] autorelease];
     message.JsonBruteData = jsonData;
     
 	for (NSString *key in [jsonData keyEnumerator])

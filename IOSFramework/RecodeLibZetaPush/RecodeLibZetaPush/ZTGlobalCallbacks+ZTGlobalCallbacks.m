@@ -1,14 +1,14 @@
 //
-//  DDGlobalCallbacks+DDGlobalCallbacks.m
+//  ZTGlobalCallbacks+ZTGlobalCallbacks.m
 //  RecodeLibZetaPush
 //
 //  Created by Hakim on 12/08/15.
 //  Copyright (c) 2015 Hakim. All rights reserved.
 //
 
-#import "DDGlobalCallbacks+DDGlobalCallbacks.h"
+#import "ZTGlobalCallbacks+ZTGlobalCallbacks.h"
 
-@implementation DDGlobalCallbacks 
+@implementation ZTGlobalCallbacks 
 
 @synthesize
 selector = p_selector,
@@ -63,7 +63,7 @@ channel = f_channel;
     [super dealloc];
 }
 
--(id)initWithClientContext:(DDCometClient *)context Selector:(SEL)selector FiringSelector:(SEL)ignitionSel
+-(id)initWithClientContext:(ZTCometClient *)context Selector:(SEL)selector FiringSelector:(SEL)ignitionSel
 {
     if((self = [super init]))
     {
@@ -78,7 +78,7 @@ channel = f_channel;
     return self;
 }
 
--(id)setClientDuringProcess:(DDCometClient *)context
+-(id)setClientDuringProcess:(ZTCometClient *)context
 {
     f_client = context;
     

@@ -1,22 +1,22 @@
-#import "DDConcurrentQueue.h"
+#import "ZTConcurrentQueue.h"
 #import <libkern/OSAtomic.h>
 
 
-@interface DDConcurrentQueueNode : NSObject
+@interface ZTConcurrentQueueNode : NSObject
 {
 @private
     id m_object;
-	DDConcurrentQueueNode * volatile m_next;
+	ZTConcurrentQueueNode * volatile m_next;
 }
 
 @property (nonatomic, retain) id object;
-@property (nonatomic, readonly) DDConcurrentQueueNode *next;
+@property (nonatomic, readonly) ZTConcurrentQueueNode *next;
 
-- (BOOL)compareNext:(DDConcurrentQueueNode *)old andSet:(DDConcurrentQueueNode *)new;
+- (BOOL)compareNext:(ZTConcurrentQueueNode *)old andSet:(ZTConcurrentQueueNode *)new;
 
 @end
 
-@implementation DDConcurrentQueueNode
+@implementation ZTConcurrentQueueNode
 
 @synthesize object = m_object, next = m_next;
 
@@ -36,27 +36,27 @@
 	[super dealloc];
 }
 
-- (BOOL)compareNext:(DDConcurrentQueueNode *)old andSet:(DDConcurrentQueueNode *)new
+- (BOOL)compareNext:(ZTConcurrentQueueNode *)old andSet:(ZTConcurrentQueueNode *)new
 {
 	return OSAtomicCompareAndSwapPtrBarrier(old, new, (void * volatile *)&m_next);
 }
 
 @end
 
-@interface DDConcurrentQueue ()
+@interface ZTConcurrentQueue ()
 
-- (BOOL)compareHead:(DDConcurrentQueueNode *)old andSet:(DDConcurrentQueueNode *)new;
-- (BOOL)compareTail:(DDConcurrentQueueNode *)old andSet:(DDConcurrentQueueNode *)new;
+- (BOOL)compareHead:(ZTConcurrentQueueNode *)old andSet:(ZTConcurrentQueueNode *)new;
+- (BOOL)compareTail:(ZTConcurrentQueueNode *)old andSet:(ZTConcurrentQueueNode *)new;
 
 @end
 
-@implementation DDConcurrentQueue
+@implementation ZTConcurrentQueue
 
 - (id)init
 {
 	if ((self = [super init]))
 	{
-		DDConcurrentQueueNode *node = [[DDConcurrentQueueNode alloc] init];
+		ZTConcurrentQueueNode *node = [[ZTConcurrentQueueNode alloc] init];
 		m_head = node;
 		m_tail = node;
 	}
@@ -65,11 +65,11 @@
 
 - (void)addObject:(id)object
 {
-	DDConcurrentQueueNode *node = [[DDConcurrentQueueNode alloc] initWithObject:object];
+	ZTConcurrentQueueNode *node = [[ZTConcurrentQueueNode alloc] initWithObject:object];
 	while (YES)
 	{
-		DDConcurrentQueueNode *tail = m_tail;
-		DDConcurrentQueueNode *next = tail.next;
+		ZTConcurrentQueueNode *tail = m_tail;
+		ZTConcurrentQueueNode *next = tail.next;
 		if (tail == m_tail)
 		{
 			if (next == nil)
@@ -94,9 +94,9 @@
 {
 	while (YES)
     {
-		DDConcurrentQueueNode *head = m_head;
-		DDConcurrentQueueNode *tail = m_tail;
-		DDConcurrentQueueNode *first = head.next;
+		ZTConcurrentQueueNode *head = m_head;
+		ZTConcurrentQueueNode *tail = m_tail;
+		ZTConcurrentQueueNode *first = head.next;
 		if (head == m_head)
 		{
 			if (head == tail)
@@ -121,17 +121,17 @@
     }
 }
 
-- (void)setDelegate:(id<DDQueueDelegate>)delegate
+- (void)setDelegate:(id<ZTQueueDelegate>)delegate
 {
 	m_delegate = delegate;
 }
 
-- (BOOL)compareHead:(DDConcurrentQueueNode *)old andSet:(DDConcurrentQueueNode *)new
+- (BOOL)compareHead:(ZTConcurrentQueueNode *)old andSet:(ZTConcurrentQueueNode *)new
 {
 	return OSAtomicCompareAndSwapPtrBarrier(old, new, (void * volatile *)&m_head);
 }
 
-- (BOOL)compareTail:(DDConcurrentQueueNode *)old andSet:(DDConcurrentQueueNode *)new
+- (BOOL)compareTail:(ZTConcurrentQueueNode *)old andSet:(ZTConcurrentQueueNode *)new
 {
 	return OSAtomicCompareAndSwapPtrBarrier(old, new, (void * volatile *)&m_tail);
 }

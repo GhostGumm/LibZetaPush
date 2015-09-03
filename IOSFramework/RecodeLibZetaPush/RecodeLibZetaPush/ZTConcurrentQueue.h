@@ -1,21 +1,21 @@
 
 #import <Foundation/Foundation.h>
-#import "DDQueue.h"
+#import "ZTQueue.h"
 
 
-@class DDConcurrentQueueNode;
+@class ZTConcurrentQueueNode;
 
 /**
  * Lock-free queue based on Doug Lea's ConcurrentLinkedQueue, based on
  * http://www.cs.rochester.edu/u/michael/PODC96.html by Maged M. Michael and Michael L. Scott.
  */
 
-@interface DDConcurrentQueue : NSObject <DDQueue>
+@interface ZTConcurrentQueue : NSObject <ZTQueue>
 {
 @private
-	DDConcurrentQueueNode * volatile m_head;
-	DDConcurrentQueueNode * volatile m_tail;
-	id<DDQueueDelegate> m_delegate;
+	ZTConcurrentQueueNode * volatile m_head;
+	ZTConcurrentQueueNode * volatile m_tail;
+	id<ZTQueueDelegate> m_delegate;
 }
 
 @end

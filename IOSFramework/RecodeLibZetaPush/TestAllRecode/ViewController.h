@@ -7,12 +7,12 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "DDCometClient.h"
+#import "ZTCometClient.h"
 
 @interface ViewController : UIViewController
 {
 @private
-    DDCometClient *m_client;
+    ZTCometClient *m_client;
     UITextView *m_textView;
     UITextField *m_textField;
 }

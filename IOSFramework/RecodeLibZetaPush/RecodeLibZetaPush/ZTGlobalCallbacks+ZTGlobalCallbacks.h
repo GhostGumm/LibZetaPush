@@ -1,32 +1,32 @@
 //
-//  DDGlobalCallbacks+DDGlobalCallbacks.h
+//  ZTGlobalCallbacks+ZTGlobalCallbacks.h
 //  RecodeLibZetaPush
 //
 //  Created by Hakim on 12/08/15.
 //  Copyright (c) 2015 Hakim. All rights reserved.
 //
 
-#import "DDCometClient.h"
-#import "DDCometMessage.h"
+#import "ZTCometClient.h"
+#import "ZTCometMessage.h"
 
-@interface DDGlobalCallbacks :DDCometClient
+@interface ZTGlobalCallbacks :ZTCometClient
 {
 @public
-    DDCometClient *client;
+    ZTCometClient *client;
 }
 
 // ------ General purpose variables ------ //
 @property (nonatomic, readwrite)bool processed;
 @property (nonatomic, readwrite) SEL selector;
 @property (nonatomic, readwrite) SEL messageSelector;
-@property (nonatomic, retain)DDCometClient *client;
+@property (nonatomic, retain)ZTCometClient *client;
 @property (nonatomic, retain) NSString *channel;
 @property (nonatomic, readwrite)bool noErase;
 
 // ------ General purpose Methods ------ //
 
--(id)setClientDuringProcess:(DDCometClient *)context;
--(id)initWithClientContext:(DDCometClient *)context Selector:(SEL)selector FiringSelector:(SEL) ignitionSel;
+-(id)setClientDuringProcess:(ZTCometClient *)context;
+-(id)initWithClientContext:(ZTCometClient *)context Selector:(SEL)selector FiringSelector:(SEL) ignitionSel;
 
 // ************************************** //
 

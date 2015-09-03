@@ -1,8 +1,8 @@
 
-#import "DDCometSubscription.h"
+#import "ZTCometSubscription.h"
 
 
-@implementation DDCometSubscription
+@implementation ZTCometSubscription
 
 @synthesize channel = m_channel,
 	target = m_target,

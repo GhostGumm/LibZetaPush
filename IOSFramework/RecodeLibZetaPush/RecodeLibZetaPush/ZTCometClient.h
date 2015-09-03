@@ -31,35 +31,35 @@
 #import <Foundation/Foundation.h>
 
 
-@class DDCometLongPollingTransport;
-@class DDCometMessage;
-@class DDCometSubscription;
-@class DDQueueProcessor;
-@class DDGlobalCallbacks;
-@protocol DDCometClientDelegate;
-@protocol DDQueue;
+@class ZTCometLongPollingTransport;
+@class ZTCometMessage;
+@class ZTCometSubscription;
+@class ZTQueueProcessor;
+@class ZTGlobalCallbacks;
+@protocol ZTCometClientDelegate;
+@protocol ZTQueue;
 
 typedef enum
 {
-	DDCometStateDisconnected,
-	DDCometStateConnecting,
-	DDCometStateConnected,
-	DDCometStateDisconnecting
-} DDCometState;
+	ZTCometStateDisconnected,
+	ZTCometStateConnecting,
+	ZTCometStateConnected,
+	ZTCometStateDisconnecting
+} ZTCometState;
 
-@interface DDCometClient : NSObject
+@interface ZTCometClient : NSObject
 {
 @private
 	NSURL *m_endpointURL;
 	volatile int32_t m_messageCounter;
 	NSMutableDictionary *m_pendingSubscriptions; // by id
 	NSMutableArray *m_subscriptions;
-	DDCometState m_state;
+	ZTCometState m_state;
 	NSDictionary *m_advice;
-	id<DDQueue> m_outgoingQueue;
-	id<DDQueue> m_incomingQueue;
-	DDCometLongPollingTransport *m_transport;
-	DDQueueProcessor *m_incomingProcessor;
+	id<ZTQueue> m_outgoingQueue;
+	id<ZTQueue> m_incomingQueue;
+	ZTCometLongPollingTransport *m_transport;
+	ZTQueueProcessor *m_incomingProcessor;
 }
 
 
@@ -76,9 +76,9 @@ typedef enum
 @property (nonatomic, assign) NSString *userID;
 @property (nonatomic, assign) NSString *clientID;
 @property (nonatomic, readonly) NSURL *endpointURL;
-@property (nonatomic, readwrite) DDCometState state;
+@property (nonatomic, readwrite) ZTCometState state;
 @property (nonatomic, readonly) NSDictionary *advice;
-@property (nonatomic, assign) id<DDCometClientDelegate> delegate;
+@property (nonatomic, assign) id<ZTCometClientDelegate> delegate;
 
 // --- Services Invocation --- //
 
@@ -193,31 +193,31 @@ typedef enum
 -(id)initWithAllInfo:(NSURL *)endpointURL BusinessId:(NSString *)bID DeployementId:(NSString *)depID Login:(NSString *)login PassWord:(NSString *)pass;
 - (id)initWithURL:(NSURL *)endpointURL;
 - (void)scheduleInRunLoop:(NSRunLoop *)runLoop forMode:(NSString *)mode;
-- (DDCometMessage *)sendConnectMessage;
-- (DDCometMessage *)sendHandshakeMessage;
+- (ZTCometMessage *)sendConnectMessage;
+- (ZTCometMessage *)sendHandshakeMessage;
 
-- (DDCometMessage *)handshake;
-- (DDCometMessage *)disconnect;
-- (DDCometMessage *)subscribeToChannel:(NSString *)channel target:(id)target selector:(SEL)selector;
-- (DDCometMessage *)unsubsubscribeFromChannel:(NSString *)channel target:(id)target selector:(SEL)selector;
-- (DDCometMessage *)publishData:(id)data toChannel:(NSString *)channel;
+- (ZTCometMessage *)handshake;
+- (ZTCometMessage *)disconnect;
+- (ZTCometMessage *)subscribeToChannel:(NSString *)channel target:(id)target selector:(SEL)selector;
+- (ZTCometMessage *)unsubsubscribeFromChannel:(NSString *)channel target:(id)target selector:(SEL)selector;
+- (ZTCometMessage *)publishData:(id)data toChannel:(NSString *)channel;
 - (BOOL)CheckForConnexion;
 
 @end
 
-@interface DDCometClient (Internal)
+@interface ZTCometClient (Internal)
 
-- (id<DDQueue>)outgoingQueue;
-- (id<DDQueue>)incomingQueue;
+- (id<ZTQueue>)outgoingQueue;
+- (id<ZTQueue>)incomingQueue;
 
 @end
 
-@protocol DDCometClientDelegate <NSObject>
+@protocol ZTCometClientDelegate <NSObject>
 @optional
-- (void)cometClientHandshakeDidSucceed:(DDCometClient *)client;
-- (void)cometClient:(DDCometClient *)client handshakeDidFailWithError:(NSError *)error;
-- (void)cometClientConnectDidSucceed:(DDCometClient *)client;
-- (void)cometClient:(DDCometClient *)client connectDidFailWithError:(NSError *)error;
-- (void)cometClient:(DDCometClient *)client subscriptionDidSucceed:(DDCometSubscription *)subscription;
-- (void)cometClient:(DDCometClient *)client subscription:(DDCometSubscription *)subscription didFailWithError:(NSError *)error;
+- (void)cometClientHandshakeDidSucceed:(ZTCometClient *)client;
+- (void)cometClient:(ZTCometClient *)client handshakeDidFailWithError:(NSError *)error;
+- (void)cometClientConnectDidSucceed:(ZTCometClient *)client;
+- (void)cometClient:(ZTCometClient *)client connectDidFailWithError:(NSError *)error;
+- (void)cometClient:(ZTCometClient *)client subscriptionDidSucceed:(ZTCometSubscription *)subscription;
+- (void)cometClient:(ZTCometClient *)client subscription:(ZTCometSubscription *)subscription didFailWithError:(NSError *)error;
 @end

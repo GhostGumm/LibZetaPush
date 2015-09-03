@@ -1,8 +1,8 @@
 
-#import "DDArrayQueue.h"
+#import "ZTArrayQueue.h"
 
 
-@implementation DDArrayQueue
+@implementation ZTArrayQueue
 
 - (id)init
 {
@@ -41,7 +41,7 @@
 	}
 }
 
-- (void)setDelegate:(id<DDQueueDelegate>)delegate
+- (void)setDelegate:(id<ZTQueueDelegate>)delegate
 {
 	m_delegate = delegate;
 }

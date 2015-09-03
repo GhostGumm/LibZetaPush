@@ -1,9 +1,9 @@
 
 #import <Foundation/Foundation.h>
-#import "DDQueue.h"
+#import "ZTQueue.h"
 
 
-@interface DDQueueProcessor : NSObject <DDQueueDelegate>
+@interface ZTQueueProcessor : NSObject <ZTQueueDelegate>
 {
 @private
 	id m_target;
@@ -13,7 +13,7 @@
 	NSString *m_mode;
 }
 
-+ (DDQueueProcessor *)queueProcessorWithQueue:(id<DDQueue>)queue
++ (ZTQueueProcessor *)queueProcessorWithQueue:(id<ZTQueue>)queue
 									   target:(id)target
 									 selector:(SEL)selector;
 - (id)initWithTarget:(id)target selector:(SEL)selector;

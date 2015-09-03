@@ -1,12 +1,12 @@
-#import "DDCometLongPollingTransport.h"
-#import "DDCometClient.h"
-#import "DDCometMessage.h"
-#import "DDQueue.h"
+#import "ZTCometLongPollingTransport.h"
+#import "ZTCometClient.h"
+#import "ZTCometMessage.h"
+#import "ZTQueue.h"
 #import "SBJson4.h"
-#import "DDGlobalCallbacks+DDGlobalCallbacks.h"
+#import "ZTGlobalCallbacks+ZTGlobalCallbacks.h"
 #import "Reachability.h"
 
-@interface DDCometLongPollingTransport ()
+@interface ZTCometLongPollingTransport ()
 
 - (NSURLConnection *)sendMessages:(NSArray *)messages;
 - (NSArray *)outgoingMessages;
@@ -15,9 +15,9 @@
 
 @end
 
-@implementation DDCometLongPollingTransport
+@implementation ZTCometLongPollingTransport
 
-- (id)initWithClient:(DDCometClient *)client
+- (id)initWithClient:(ZTCometClient *)client
 {
 	if ((self = [super init]))
 	{
@@ -64,7 +64,7 @@
         if ([messages count] == 0)
         {
             isPolling = YES;
-            if (m_client.state == DDCometStateConnected)
+            if (m_client.state == ZTCometStateConnected)
                     isConnectTime = true;
             else
                 [NSThread sleepForTimeInterval:0.01];
@@ -99,7 +99,7 @@
                         isPolling = YES;
                         
                         messages = [self outgoingMessages];
-                        if ([messages count] != 0 && m_client.state == DDCometStateConnected){
+                        if ([messages count] != 0 && m_client.state == ZTCometStateConnected){
                                 connection =  [self sendMessages:messages];
                                 [messages release];
                                 messages = nil;
@@ -113,7 +113,7 @@
             }
         }
         
-    } while (m_client.state != DDCometStateDisconnected);
+    } while (m_client.state != ZTCometStateDisconnected);
 }
 
 - (NSURLConnection *)sendMessages:(NSArray *)messages
@@ -141,8 +141,8 @@
 - (NSArray *)outgoingMessages
 {
 	NSMutableArray *messages = [NSMutableArray array];
-	DDCometMessage *message;
-	id<DDQueue> outgoingQueue = [m_client outgoingQueue];
+	ZTCometMessage *message;
+	id<ZTQueue> outgoingQueue = [m_client outgoingQueue];
 	while ((message = [outgoingQueue removeObject]))
 		[messages addObject:message];
 	return messages;
@@ -214,11 +214,11 @@
 	[responseData release];
 	responseData = nil;
 	
-	id<DDQueue> incomingQueue = [m_client incomingQueue];
+	id<ZTQueue> incomingQueue = [m_client incomingQueue];
 	
         for (NSDictionary *messageData in responses)
         {
-            DDCometMessage *message = [DDCometMessage messageWithJson:messageData];
+            ZTCometMessage *message = [ZTCometMessage messageWithJson:messageData];
             [incomingQueue addObject:message];
         }
         [connection release];
