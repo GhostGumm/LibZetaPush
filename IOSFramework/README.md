@@ -11,7 +11,7 @@ In order to install the library on your brand new Ios project, we give you two o
 
 - 2: You can Drag and Drop the static library into your project and import the ZTCometClient class like so :
 
-#import "ZTCometClient.h"
+'  #import "ZTCometClient.h"  '
 
 This will give you the access on the main Class wich connects all the other ones.
 
