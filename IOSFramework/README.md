@@ -26,6 +26,7 @@ In order to start the Client you have to initialize it with some basic informati
 
  m_client = [[ZTCometClient alloc] initWithAllInfo:[NSURL URLWithString:@"http://m.zpush.ovh:8080/str/strd"] BusinessId:@"GmY-HuzW" DeployementId:@"KZyH" Login:@"test2" PassWord:@"password"];
 
+****************************************
 ************* m_client  ****************
 
 m_client is class variable wich i declared into my ViewController.h like so
