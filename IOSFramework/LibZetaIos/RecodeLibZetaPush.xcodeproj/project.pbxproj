@@ -1,0 +1,907 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		121E565D1B7499E400838C9E /* ZTArrayQueue.h in Headers */ = {isa = PBXBuildFile; fileRef = 125886031B738744007AEE1B /* ZTArrayQueue.h */; };
+		121E565E1B7499E400838C9E /* ZTCometClient.h in Headers */ = {isa = PBXBuildFile; fileRef = 125886051B738744007AEE1B /* ZTCometClient.h */; };
+		121E565F1B7499E400838C9E /* ZTCometLongPollingTransport.h in Headers */ = {isa = PBXBuildFile; fileRef = 125886071B738744007AEE1B /* ZTCometLongPollingTransport.h */; };
+		121E56601B7499E400838C9E /* ZTCometMessage.h in Headers */ = {isa = PBXBuildFile; fileRef = 125886091B738744007AEE1B /* ZTCometMessage.h */; };
+		121E56611B7499E400838C9E /* ZTCometSubscription.h in Headers */ = {isa = PBXBuildFile; fileRef = 1258860B1B738744007AEE1B /* ZTCometSubscription.h */; };
+		121E56621B7499E400838C9E /* ZTConcurrentQueue.h in Headers */ = {isa = PBXBuildFile; fileRef = 1258860D1B738744007AEE1B /* ZTConcurrentQueue.h */; };
+		121E56631B7499E400838C9E /* ZTQueue.h in Headers */ = {isa = PBXBuildFile; fileRef = 1258860F1B738744007AEE1B /* ZTQueue.h */; };
+		121E56641B7499E400838C9E /* ZTQueueProcessor.h in Headers */ = {isa = PBXBuildFile; fileRef = 125886101B738744007AEE1B /* ZTQueueProcessor.h */; };
+		121E56651B7499ED00838C9E /* ZTArrayQueue.m in Sources */ = {isa = PBXBuildFile; fileRef = 125886041B738744007AEE1B /* ZTArrayQueue.m */; };
+		121E56661B7499ED00838C9E /* ZTCometClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 125886061B738744007AEE1B /* ZTCometClient.m */; };
+		121E56671B7499ED00838C9E /* ZTCometMessage.m in Sources */ = {isa = PBXBuildFile; fileRef = 1258860A1B738744007AEE1B /* ZTCometMessage.m */; };
+		121E56681B7499ED00838C9E /* ZTCometLongPollingTransport.m in Sources */ = {isa = PBXBuildFile; fileRef = 125886081B738744007AEE1B /* ZTCometLongPollingTransport.m */; };
+		121E56691B7499ED00838C9E /* ZTCometSubscription.m in Sources */ = {isa = PBXBuildFile; fileRef = 1258860C1B738744007AEE1B /* ZTCometSubscription.m */; };
+		121E566A1B7499ED00838C9E /* ZTConcurrentQueue.m in Sources */ = {isa = PBXBuildFile; fileRef = 1258860E1B738744007AEE1B /* ZTConcurrentQueue.m */; };
+		121E566B1B7499ED00838C9E /* ZTQueueProcessor.m in Sources */ = {isa = PBXBuildFile; fileRef = 125886111B738744007AEE1B /* ZTQueueProcessor.m */; };
+		121E566C1B7499FC00838C9E /* SBJson4.h in Headers */ = {isa = PBXBuildFile; fileRef = 1258861A1B738A74007AEE1B /* SBJson4.h */; };
+		121E566D1B7499FC00838C9E /* SBJson4Parser.h in Headers */ = {isa = PBXBuildFile; fileRef = 1258861B1B738A74007AEE1B /* SBJson4Parser.h */; };
+		121E566E1B7499FC00838C9E /* SBJson4Parser.m in Sources */ = {isa = PBXBuildFile; fileRef = 1258861C1B738A74007AEE1B /* SBJson4Parser.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
+		121E566F1B7499FC00838C9E /* SBJson4StreamParser.h in Headers */ = {isa = PBXBuildFile; fileRef = 1258861D1B738A74007AEE1B /* SBJson4StreamParser.h */; };
+		121E56701B7499FC00838C9E /* SBJson4StreamParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 1258861E1B738A74007AEE1B /* SBJson4StreamParser.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
+		121E56711B7499FC00838C9E /* SBJson4StreamParserState.h in Headers */ = {isa = PBXBuildFile; fileRef = 1258861F1B738A74007AEE1B /* SBJson4StreamParserState.h */; };
+		121E56721B7499FC00838C9E /* SBJson4StreamParserState.m in Sources */ = {isa = PBXBuildFile; fileRef = 125886201B738A74007AEE1B /* SBJson4StreamParserState.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
+		121E56731B7499FC00838C9E /* SBJson4Writer.h in Headers */ = {isa = PBXBuildFile; fileRef = 125886271B738A74007AEE1B /* SBJson4Writer.h */; };
+		121E56741B7499FC00838C9E /* SBJson4StreamTokeniser.h in Headers */ = {isa = PBXBuildFile; fileRef = 125886211B738A74007AEE1B /* SBJson4StreamTokeniser.h */; };
+		121E56751B7499FC00838C9E /* SBJson4StreamTokeniser.m in Sources */ = {isa = PBXBuildFile; fileRef = 125886221B738A74007AEE1B /* SBJson4StreamTokeniser.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
+		121E56761B7499FC00838C9E /* SBJson4StreamWriter.h in Headers */ = {isa = PBXBuildFile; fileRef = 125886231B738A74007AEE1B /* SBJson4StreamWriter.h */; };
+		121E56771B7499FC00838C9E /* SBJson4StreamWriter.m in Sources */ = {isa = PBXBuildFile; fileRef = 125886241B738A74007AEE1B /* SBJson4StreamWriter.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
+		121E56781B7499FC00838C9E /* SBJson4StreamWriterState.h in Headers */ = {isa = PBXBuildFile; fileRef = 125886251B738A74007AEE1B /* SBJson4StreamWriterState.h */; };
+		121E56791B7499FC00838C9E /* SBJson4StreamWriterState.m in Sources */ = {isa = PBXBuildFile; fileRef = 125886261B738A74007AEE1B /* SBJson4StreamWriterState.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
+		121E567A1B7499FC00838C9E /* SBJson4Writer.m in Sources */ = {isa = PBXBuildFile; fileRef = 125886281B738A74007AEE1B /* SBJson4Writer.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
+		125885DD1B735BB8007AEE1B /* libRecodeLibZetaPush.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 125885D11B735BB8007AEE1B /* libRecodeLibZetaPush.a */; };
+		125885F41B735DB0007AEE1B /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 125885F31B735DB0007AEE1B /* Foundation.framework */; };
+		125886121B738744007AEE1B /* ZTArrayQueue.m in Sources */ = {isa = PBXBuildFile; fileRef = 125886041B738744007AEE1B /* ZTArrayQueue.m */; };
+		125886131B738744007AEE1B /* ZTCometClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 125886061B738744007AEE1B /* ZTCometClient.m */; };
+		125886141B738744007AEE1B /* ZTCometLongPollingTransport.m in Sources */ = {isa = PBXBuildFile; fileRef = 125886081B738744007AEE1B /* ZTCometLongPollingTransport.m */; };
+		125886151B738744007AEE1B /* ZTCometMessage.m in Sources */ = {isa = PBXBuildFile; fileRef = 1258860A1B738744007AEE1B /* ZTCometMessage.m */; };
+		125886161B738744007AEE1B /* ZTCometSubscription.m in Sources */ = {isa = PBXBuildFile; fileRef = 1258860C1B738744007AEE1B /* ZTCometSubscription.m */; };
+		125886171B738744007AEE1B /* ZTConcurrentQueue.m in Sources */ = {isa = PBXBuildFile; fileRef = 1258860E1B738744007AEE1B /* ZTConcurrentQueue.m */; };
+		125886181B738744007AEE1B /* ZTQueueProcessor.m in Sources */ = {isa = PBXBuildFile; fileRef = 125886111B738744007AEE1B /* ZTQueueProcessor.m */; };
+		125886291B738A74007AEE1B /* SBJson4Parser.m in Sources */ = {isa = PBXBuildFile; fileRef = 1258861C1B738A74007AEE1B /* SBJson4Parser.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
+		1258862A1B738A74007AEE1B /* SBJson4StreamParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 1258861E1B738A74007AEE1B /* SBJson4StreamParser.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
+		1258862B1B738A74007AEE1B /* SBJson4StreamParserState.m in Sources */ = {isa = PBXBuildFile; fileRef = 125886201B738A74007AEE1B /* SBJson4StreamParserState.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
+		1258862C1B738A74007AEE1B /* SBJson4StreamTokeniser.m in Sources */ = {isa = PBXBuildFile; fileRef = 125886221B738A74007AEE1B /* SBJson4StreamTokeniser.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
+		1258862D1B738A74007AEE1B /* SBJson4StreamWriter.m in Sources */ = {isa = PBXBuildFile; fileRef = 125886241B738A74007AEE1B /* SBJson4StreamWriter.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
+		1258862E1B738A74007AEE1B /* SBJson4StreamWriterState.m in Sources */ = {isa = PBXBuildFile; fileRef = 125886261B738A74007AEE1B /* SBJson4StreamWriterState.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
+		1258862F1B738A74007AEE1B /* SBJson4Writer.m in Sources */ = {isa = PBXBuildFile; fileRef = 125886281B738A74007AEE1B /* SBJson4Writer.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
+		125886D01B73A32F007AEE1B /* ZTArrayQueue.h in Headers */ = {isa = PBXBuildFile; fileRef = 125886031B738744007AEE1B /* ZTArrayQueue.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		125886D11B73A32F007AEE1B /* ZTCometClient.h in Headers */ = {isa = PBXBuildFile; fileRef = 125886051B738744007AEE1B /* ZTCometClient.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		125886D21B73A32F007AEE1B /* ZTCometLongPollingTransport.h in Headers */ = {isa = PBXBuildFile; fileRef = 125886071B738744007AEE1B /* ZTCometLongPollingTransport.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		125886D31B73A32F007AEE1B /* ZTCometMessage.h in Headers */ = {isa = PBXBuildFile; fileRef = 125886091B738744007AEE1B /* ZTCometMessage.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		125886D41B73A32F007AEE1B /* ZTCometSubscription.h in Headers */ = {isa = PBXBuildFile; fileRef = 1258860B1B738744007AEE1B /* ZTCometSubscription.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		125886D51B73A32F007AEE1B /* ZTConcurrentQueue.h in Headers */ = {isa = PBXBuildFile; fileRef = 1258860D1B738744007AEE1B /* ZTConcurrentQueue.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		125886D61B73A32F007AEE1B /* ZTQueue.h in Headers */ = {isa = PBXBuildFile; fileRef = 1258860F1B738744007AEE1B /* ZTQueue.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		125886D71B73A32F007AEE1B /* ZTQueueProcessor.h in Headers */ = {isa = PBXBuildFile; fileRef = 125886101B738744007AEE1B /* ZTQueueProcessor.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		125886E61B73A427007AEE1B /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 125886E51B73A427007AEE1B /* main.m */; };
+		125886E91B73A427007AEE1B /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 125886E81B73A427007AEE1B /* AppDelegate.m */; };
+		125886EC1B73A427007AEE1B /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 125886EB1B73A427007AEE1B /* ViewController.m */; };
+		125886EF1B73A427007AEE1B /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 125886ED1B73A427007AEE1B /* Main.storyboard */; };
+		125886F11B73A427007AEE1B /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 125886F01B73A427007AEE1B /* Images.xcassets */; };
+		125886F41B73A427007AEE1B /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 125886F21B73A427007AEE1B /* LaunchScreen.xib */; };
+		1258870B1B73A90F007AEE1B /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 125885F31B735DB0007AEE1B /* Foundation.framework */; };
+		1258870E1B73ACF2007AEE1B /* SBJson4.h in Headers */ = {isa = PBXBuildFile; fileRef = 1258861A1B738A74007AEE1B /* SBJson4.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		1258870F1B73ACF3007AEE1B /* SBJson4Parser.h in Headers */ = {isa = PBXBuildFile; fileRef = 1258861B1B738A74007AEE1B /* SBJson4Parser.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		125887101B73ACF3007AEE1B /* SBJson4Parser.m in Headers */ = {isa = PBXBuildFile; fileRef = 1258861C1B738A74007AEE1B /* SBJson4Parser.m */; settings = {ATTRIBUTES = (Public, ); }; };
+		125887111B73ACF3007AEE1B /* SBJson4StreamParser.h in Headers */ = {isa = PBXBuildFile; fileRef = 1258861D1B738A74007AEE1B /* SBJson4StreamParser.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		125887121B73ACF3007AEE1B /* SBJson4StreamParser.m in Headers */ = {isa = PBXBuildFile; fileRef = 1258861E1B738A74007AEE1B /* SBJson4StreamParser.m */; settings = {ATTRIBUTES = (Public, ); }; };
+		125887131B73ACF3007AEE1B /* SBJson4StreamParserState.h in Headers */ = {isa = PBXBuildFile; fileRef = 1258861F1B738A74007AEE1B /* SBJson4StreamParserState.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		125887141B73ACF3007AEE1B /* SBJson4StreamParserState.m in Headers */ = {isa = PBXBuildFile; fileRef = 125886201B738A74007AEE1B /* SBJson4StreamParserState.m */; settings = {ATTRIBUTES = (Public, ); }; };
+		125887151B73ACF3007AEE1B /* SBJson4Writer.h in Headers */ = {isa = PBXBuildFile; fileRef = 125886271B738A74007AEE1B /* SBJson4Writer.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		125887161B73ACF3007AEE1B /* SBJson4StreamTokeniser.h in Headers */ = {isa = PBXBuildFile; fileRef = 125886211B738A74007AEE1B /* SBJson4StreamTokeniser.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		125887171B73ACF3007AEE1B /* SBJson4StreamTokeniser.m in Headers */ = {isa = PBXBuildFile; fileRef = 125886221B738A74007AEE1B /* SBJson4StreamTokeniser.m */; settings = {ATTRIBUTES = (Public, ); }; };
+		125887181B73ACF3007AEE1B /* SBJson4StreamWriter.h in Headers */ = {isa = PBXBuildFile; fileRef = 125886231B738A74007AEE1B /* SBJson4StreamWriter.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		125887191B73ACF3007AEE1B /* SBJson4StreamWriter.m in Headers */ = {isa = PBXBuildFile; fileRef = 125886241B738A74007AEE1B /* SBJson4StreamWriter.m */; settings = {ATTRIBUTES = (Public, ); }; };
+		1258871A1B73ACF3007AEE1B /* SBJson4StreamWriterState.h in Headers */ = {isa = PBXBuildFile; fileRef = 125886251B738A74007AEE1B /* SBJson4StreamWriterState.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		1258871B1B73ACF3007AEE1B /* SBJson4StreamWriterState.m in Headers */ = {isa = PBXBuildFile; fileRef = 125886261B738A74007AEE1B /* SBJson4StreamWriterState.m */; settings = {ATTRIBUTES = (Public, ); }; };
+		1258871C1B73ACF3007AEE1B /* SBJson4Writer.m in Headers */ = {isa = PBXBuildFile; fileRef = 125886281B738A74007AEE1B /* SBJson4Writer.m */; settings = {ATTRIBUTES = (Public, ); }; };
+		1258871D1B73AD06007AEE1B /* ZTArrayQueue.h in Copy Files */ = {isa = PBXBuildFile; fileRef = 125886031B738744007AEE1B /* ZTArrayQueue.h */; };
+		1258871E1B73AD06007AEE1B /* ZTCometClient.h in Copy Files */ = {isa = PBXBuildFile; fileRef = 125886051B738744007AEE1B /* ZTCometClient.h */; };
+		1258871F1B73AD06007AEE1B /* ZTCometLongPollingTransport.h in Copy Files */ = {isa = PBXBuildFile; fileRef = 125886071B738744007AEE1B /* ZTCometLongPollingTransport.h */; };
+		125887201B73AD06007AEE1B /* ZTCometMessage.h in Copy Files */ = {isa = PBXBuildFile; fileRef = 125886091B738744007AEE1B /* ZTCometMessage.h */; };
+		125887211B73AD06007AEE1B /* ZTCometSubscription.h in Copy Files */ = {isa = PBXBuildFile; fileRef = 1258860B1B738744007AEE1B /* ZTCometSubscription.h */; };
+		125887221B73AD06007AEE1B /* ZTConcurrentQueue.h in Copy Files */ = {isa = PBXBuildFile; fileRef = 1258860D1B738744007AEE1B /* ZTConcurrentQueue.h */; };
+		125887231B73AD06007AEE1B /* ZTQueue.h in Copy Files */ = {isa = PBXBuildFile; fileRef = 1258860F1B738744007AEE1B /* ZTQueue.h */; };
+		125887241B73AD06007AEE1B /* ZTQueueProcessor.h in Copy Files */ = {isa = PBXBuildFile; fileRef = 125886101B738744007AEE1B /* ZTQueueProcessor.h */; };
+		1293A9C71B7B9A71005CDE2E /* ZTGlobalCallbacks+ZTGlobalCallbacks.h in Headers */ = {isa = PBXBuildFile; fileRef = 1293A9C51B7B9A71005CDE2E /* ZTGlobalCallbacks+ZTGlobalCallbacks.h */; };
+		1293A9C81B7B9A71005CDE2E /* ZTGlobalCallbacks+ZTGlobalCallbacks.h in Headers */ = {isa = PBXBuildFile; fileRef = 1293A9C51B7B9A71005CDE2E /* ZTGlobalCallbacks+ZTGlobalCallbacks.h */; };
+		1293A9C91B7B9A71005CDE2E /* ZTGlobalCallbacks+ZTGlobalCallbacks.m in Sources */ = {isa = PBXBuildFile; fileRef = 1293A9C61B7B9A71005CDE2E /* ZTGlobalCallbacks+ZTGlobalCallbacks.m */; };
+		1293A9CA1B7B9A71005CDE2E /* ZTGlobalCallbacks+ZTGlobalCallbacks.m in Sources */ = {isa = PBXBuildFile; fileRef = 1293A9C61B7B9A71005CDE2E /* ZTGlobalCallbacks+ZTGlobalCallbacks.m */; };
+		12996B301B984AF700C3465E /* APLAppDelegate.h in Headers */ = {isa = PBXBuildFile; fileRef = 12996B2D1B984AF700C3465E /* APLAppDelegate.h */; };
+		12996B311B984AF700C3465E /* APLAppDelegate.h in Headers */ = {isa = PBXBuildFile; fileRef = 12996B2D1B984AF700C3465E /* APLAppDelegate.h */; };
+		12996B321B984AF700C3465E /* APLViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = 12996B2E1B984AF700C3465E /* APLViewController.h */; };
+		12996B331B984AF700C3465E /* APLViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = 12996B2E1B984AF700C3465E /* APLViewController.h */; };
+		12996B341B984AF700C3465E /* Reachability.h in Headers */ = {isa = PBXBuildFile; fileRef = 12996B2F1B984AF700C3465E /* Reachability.h */; };
+		12996B351B984AF700C3465E /* Reachability.h in Headers */ = {isa = PBXBuildFile; fileRef = 12996B2F1B984AF700C3465E /* Reachability.h */; };
+		12996B391B984B0500C3465E /* APLAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 12996B361B984B0500C3465E /* APLAppDelegate.m */; };
+		12996B3A1B984B0500C3465E /* APLAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 12996B361B984B0500C3465E /* APLAppDelegate.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
+		12996B3B1B984B0500C3465E /* APLViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 12996B371B984B0500C3465E /* APLViewController.m */; };
+		12996B3C1B984B0500C3465E /* APLViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 12996B371B984B0500C3465E /* APLViewController.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
+		12996B3D1B984B0500C3465E /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = 12996B381B984B0500C3465E /* Reachability.m */; };
+		12996B3E1B984B0500C3465E /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = 12996B381B984B0500C3465E /* Reachability.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
+		12996B401B985A3400C3465E /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 12996B3F1B985A3400C3465E /* SystemConfiguration.framework */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		125885DE1B735BB8007AEE1B /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 125885C91B735BB8007AEE1B /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 125885D01B735BB8007AEE1B;
+			remoteInfo = RecodeLibZetaPush;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		125885CF1B735BB8007AEE1B /* Copy Files */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "include/$(PRODUCT_NAME)";
+			dstSubfolderSpec = 16;
+			files = (
+				1258871D1B73AD06007AEE1B /* ZTArrayQueue.h in Copy Files */,
+				1258871E1B73AD06007AEE1B /* ZTCometClient.h in Copy Files */,
+				1258871F1B73AD06007AEE1B /* ZTCometLongPollingTransport.h in Copy Files */,
+				125887201B73AD06007AEE1B /* ZTCometMessage.h in Copy Files */,
+				125887211B73AD06007AEE1B /* ZTCometSubscription.h in Copy Files */,
+				125887221B73AD06007AEE1B /* ZTConcurrentQueue.h in Copy Files */,
+				125887231B73AD06007AEE1B /* ZTQueue.h in Copy Files */,
+				125887241B73AD06007AEE1B /* ZTQueueProcessor.h in Copy Files */,
+			);
+			name = "Copy Files";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
+/* Begin PBXFileReference section */
+		125885D11B735BB8007AEE1B /* libRecodeLibZetaPush.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libRecodeLibZetaPush.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		125885DC1B735BB8007AEE1B /* RecodeLibZetaPushTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = RecodeLibZetaPushTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		125885E21B735BB8007AEE1B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		125885F31B735DB0007AEE1B /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		125886031B738744007AEE1B /* ZTArrayQueue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = ZTArrayQueue.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
+		125886041B738744007AEE1B /* ZTArrayQueue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = ZTArrayQueue.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
+		125886051B738744007AEE1B /* ZTCometClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = ZTCometClient.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
+		125886061B738744007AEE1B /* ZTCometClient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZTCometClient.m; sourceTree = "<group>"; };
+		125886071B738744007AEE1B /* ZTCometLongPollingTransport.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZTCometLongPollingTransport.h; sourceTree = "<group>"; };
+		125886081B738744007AEE1B /* ZTCometLongPollingTransport.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZTCometLongPollingTransport.m; sourceTree = "<group>"; };
+		125886091B738744007AEE1B /* ZTCometMessage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZTCometMessage.h; sourceTree = "<group>"; };
+		1258860A1B738744007AEE1B /* ZTCometMessage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZTCometMessage.m; sourceTree = "<group>"; };
+		1258860B1B738744007AEE1B /* ZTCometSubscription.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZTCometSubscription.h; sourceTree = "<group>"; };
+		1258860C1B738744007AEE1B /* ZTCometSubscription.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZTCometSubscription.m; sourceTree = "<group>"; };
+		1258860D1B738744007AEE1B /* ZTConcurrentQueue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZTConcurrentQueue.h; sourceTree = "<group>"; };
+		1258860E1B738744007AEE1B /* ZTConcurrentQueue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZTConcurrentQueue.m; sourceTree = "<group>"; };
+		1258860F1B738744007AEE1B /* ZTQueue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZTQueue.h; sourceTree = "<group>"; };
+		125886101B738744007AEE1B /* ZTQueueProcessor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZTQueueProcessor.h; sourceTree = "<group>"; };
+		125886111B738744007AEE1B /* ZTQueueProcessor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZTQueueProcessor.m; sourceTree = "<group>"; };
+		1258861A1B738A74007AEE1B /* SBJson4.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBJson4.h; sourceTree = "<group>"; };
+		1258861B1B738A74007AEE1B /* SBJson4Parser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBJson4Parser.h; sourceTree = "<group>"; };
+		1258861C1B738A74007AEE1B /* SBJson4Parser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBJson4Parser.m; sourceTree = "<group>"; };
+		1258861D1B738A74007AEE1B /* SBJson4StreamParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBJson4StreamParser.h; sourceTree = "<group>"; };
+		1258861E1B738A74007AEE1B /* SBJson4StreamParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBJson4StreamParser.m; sourceTree = "<group>"; };
+		1258861F1B738A74007AEE1B /* SBJson4StreamParserState.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBJson4StreamParserState.h; sourceTree = "<group>"; };
+		125886201B738A74007AEE1B /* SBJson4StreamParserState.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBJson4StreamParserState.m; sourceTree = "<group>"; };
+		125886211B738A74007AEE1B /* SBJson4StreamTokeniser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBJson4StreamTokeniser.h; sourceTree = "<group>"; };
+		125886221B738A74007AEE1B /* SBJson4StreamTokeniser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBJson4StreamTokeniser.m; sourceTree = "<group>"; };
+		125886231B738A74007AEE1B /* SBJson4StreamWriter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBJson4StreamWriter.h; sourceTree = "<group>"; };
+		125886241B738A74007AEE1B /* SBJson4StreamWriter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBJson4StreamWriter.m; sourceTree = "<group>"; };
+		125886251B738A74007AEE1B /* SBJson4StreamWriterState.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBJson4StreamWriterState.h; sourceTree = "<group>"; };
+		125886261B738A74007AEE1B /* SBJson4StreamWriterState.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBJson4StreamWriterState.m; sourceTree = "<group>"; };
+		125886271B738A74007AEE1B /* SBJson4Writer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBJson4Writer.h; sourceTree = "<group>"; };
+		125886281B738A74007AEE1B /* SBJson4Writer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBJson4Writer.m; sourceTree = "<group>"; };
+		125886E11B73A427007AEE1B /* TestAllRecode.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TestAllRecode.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		125886E41B73A427007AEE1B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		125886E51B73A427007AEE1B /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		125886E71B73A427007AEE1B /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		125886E81B73A427007AEE1B /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		125886EA1B73A427007AEE1B /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
+		125886EB1B73A427007AEE1B /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
+		125886EE1B73A427007AEE1B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		125886F01B73A427007AEE1B /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
+		125886F31B73A427007AEE1B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
+		125886FE1B73A427007AEE1B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		125886FF1B73A427007AEE1B /* TestAllRecodeTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TestAllRecodeTests.m; sourceTree = "<group>"; };
+		1293A9C51B7B9A71005CDE2E /* ZTGlobalCallbacks+ZTGlobalCallbacks.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "ZTGlobalCallbacks+ZTGlobalCallbacks.h"; sourceTree = "<group>"; };
+		1293A9C61B7B9A71005CDE2E /* ZTGlobalCallbacks+ZTGlobalCallbacks.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "ZTGlobalCallbacks+ZTGlobalCallbacks.m"; sourceTree = "<group>"; };
+		12996B2D1B984AF700C3465E /* APLAppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = APLAppDelegate.h; sourceTree = "<group>"; };
+		12996B2E1B984AF700C3465E /* APLViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = APLViewController.h; sourceTree = "<group>"; };
+		12996B2F1B984AF700C3465E /* Reachability.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Reachability.h; sourceTree = "<group>"; };
+		12996B361B984B0500C3465E /* APLAppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = APLAppDelegate.m; sourceTree = "<group>"; };
+		12996B371B984B0500C3465E /* APLViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = APLViewController.m; sourceTree = "<group>"; };
+		12996B381B984B0500C3465E /* Reachability.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Reachability.m; sourceTree = "<group>"; };
+		12996B3F1B985A3400C3465E /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		125885CE1B735BB8007AEE1B /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				125885F41B735DB0007AEE1B /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		125885D91B735BB8007AEE1B /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				125885DD1B735BB8007AEE1B /* libRecodeLibZetaPush.a in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		125886DE1B73A426007AEE1B /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				12996B401B985A3400C3465E /* SystemConfiguration.framework in Frameworks */,
+				1258870B1B73A90F007AEE1B /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		125885C81B735BB8007AEE1B = {
+			isa = PBXGroup;
+			children = (
+				12996B3F1B985A3400C3465E /* SystemConfiguration.framework */,
+				125887071B73A43A007AEE1B /* RecodeSources */,
+				125886E21B73A427007AEE1B /* TestAllRecode */,
+				125886FC1B73A427007AEE1B /* TestAllRecodeTests */,
+				125885D21B735BB8007AEE1B /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		125885D21B735BB8007AEE1B /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				125885D11B735BB8007AEE1B /* libRecodeLibZetaPush.a */,
+				125885DC1B735BB8007AEE1B /* RecodeLibZetaPushTests.xctest */,
+				125886E11B73A427007AEE1B /* TestAllRecode.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		125885D31B735BB8007AEE1B /* RecodeLibZetaPush */ = {
+			isa = PBXGroup;
+			children = (
+				1293A9C41B7B99EB005CDE2E /* ZetaServices */,
+				125886751B739E49007AEE1B /* ZetaLibIncludes */,
+				125885EC1B735C2F007AEE1B /* ZetaCoreLibrary */,
+			);
+			path = RecodeLibZetaPush;
+			sourceTree = "<group>";
+		};
+		125885E01B735BB8007AEE1B /* RecodeLibZetaPushTests */ = {
+			isa = PBXGroup;
+			children = (
+				125885E11B735BB8007AEE1B /* Supporting Files */,
+			);
+			path = RecodeLibZetaPushTests;
+			sourceTree = "<group>";
+		};
+		125885E11B735BB8007AEE1B /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				125885E21B735BB8007AEE1B /* Info.plist */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		125885EC1B735C2F007AEE1B /* ZetaCoreLibrary */ = {
+			isa = PBXGroup;
+			children = (
+				12996B361B984B0500C3465E /* APLAppDelegate.m */,
+				12996B371B984B0500C3465E /* APLViewController.m */,
+				12996B381B984B0500C3465E /* Reachability.m */,
+				125886041B738744007AEE1B /* ZTArrayQueue.m */,
+				125886061B738744007AEE1B /* ZTCometClient.m */,
+				1258860A1B738744007AEE1B /* ZTCometMessage.m */,
+				125886081B738744007AEE1B /* ZTCometLongPollingTransport.m */,
+				1258860C1B738744007AEE1B /* ZTCometSubscription.m */,
+				1258860E1B738744007AEE1B /* ZTConcurrentQueue.m */,
+				125886111B738744007AEE1B /* ZTQueueProcessor.m */,
+			);
+			name = ZetaCoreLibrary;
+			sourceTree = "<group>";
+		};
+		125885F51B73643F007AEE1B /* Freworks&libraries */ = {
+			isa = PBXGroup;
+			children = (
+				125885F71B7364E7007AEE1B /* Libraries */,
+				125885F61B7364DD007AEE1B /* Frameworks */,
+			);
+			name = "Freworks&libraries";
+			sourceTree = "<group>";
+		};
+		125885F61B7364DD007AEE1B /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				125885F31B735DB0007AEE1B /* Foundation.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		125885F71B7364E7007AEE1B /* Libraries */ = {
+			isa = PBXGroup;
+			children = (
+				125886191B738986007AEE1B /* SBJson */,
+			);
+			name = Libraries;
+			sourceTree = "<group>";
+		};
+		125886191B738986007AEE1B /* SBJson */ = {
+			isa = PBXGroup;
+			children = (
+				1258861A1B738A74007AEE1B /* SBJson4.h */,
+				1258861B1B738A74007AEE1B /* SBJson4Parser.h */,
+				1258861C1B738A74007AEE1B /* SBJson4Parser.m */,
+				1258861D1B738A74007AEE1B /* SBJson4StreamParser.h */,
+				1258861E1B738A74007AEE1B /* SBJson4StreamParser.m */,
+				1258861F1B738A74007AEE1B /* SBJson4StreamParserState.h */,
+				125886201B738A74007AEE1B /* SBJson4StreamParserState.m */,
+				125886271B738A74007AEE1B /* SBJson4Writer.h */,
+				125886211B738A74007AEE1B /* SBJson4StreamTokeniser.h */,
+				125886221B738A74007AEE1B /* SBJson4StreamTokeniser.m */,
+				125886231B738A74007AEE1B /* SBJson4StreamWriter.h */,
+				125886241B738A74007AEE1B /* SBJson4StreamWriter.m */,
+				125886251B738A74007AEE1B /* SBJson4StreamWriterState.h */,
+				125886261B738A74007AEE1B /* SBJson4StreamWriterState.m */,
+				125886281B738A74007AEE1B /* SBJson4Writer.m */,
+			);
+			name = SBJson;
+			sourceTree = "<group>";
+		};
+		125886751B739E49007AEE1B /* ZetaLibIncludes */ = {
+			isa = PBXGroup;
+			children = (
+				12996B2D1B984AF700C3465E /* APLAppDelegate.h */,
+				12996B2E1B984AF700C3465E /* APLViewController.h */,
+				12996B2F1B984AF700C3465E /* Reachability.h */,
+				125886031B738744007AEE1B /* ZTArrayQueue.h */,
+				125886051B738744007AEE1B /* ZTCometClient.h */,
+				125886071B738744007AEE1B /* ZTCometLongPollingTransport.h */,
+				125886091B738744007AEE1B /* ZTCometMessage.h */,
+				1258860B1B738744007AEE1B /* ZTCometSubscription.h */,
+				1258860D1B738744007AEE1B /* ZTConcurrentQueue.h */,
+				1258860F1B738744007AEE1B /* ZTQueue.h */,
+				125886101B738744007AEE1B /* ZTQueueProcessor.h */,
+			);
+			name = ZetaLibIncludes;
+			sourceTree = "<group>";
+		};
+		125886E21B73A427007AEE1B /* TestAllRecode */ = {
+			isa = PBXGroup;
+			children = (
+				125886E71B73A427007AEE1B /* AppDelegate.h */,
+				125886E81B73A427007AEE1B /* AppDelegate.m */,
+				125886EA1B73A427007AEE1B /* ViewController.h */,
+				125886EB1B73A427007AEE1B /* ViewController.m */,
+				125886ED1B73A427007AEE1B /* Main.storyboard */,
+				125886F01B73A427007AEE1B /* Images.xcassets */,
+				125886F21B73A427007AEE1B /* LaunchScreen.xib */,
+				125886E31B73A427007AEE1B /* Supporting Files */,
+			);
+			path = TestAllRecode;
+			sourceTree = "<group>";
+		};
+		125886E31B73A427007AEE1B /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				125886E41B73A427007AEE1B /* Info.plist */,
+				125886E51B73A427007AEE1B /* main.m */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		125886FC1B73A427007AEE1B /* TestAllRecodeTests */ = {
+			isa = PBXGroup;
+			children = (
+				125886FF1B73A427007AEE1B /* TestAllRecodeTests.m */,
+				125886FD1B73A427007AEE1B /* Supporting Files */,
+			);
+			path = TestAllRecodeTests;
+			sourceTree = "<group>";
+		};
+		125886FD1B73A427007AEE1B /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				125886FE1B73A427007AEE1B /* Info.plist */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		125887071B73A43A007AEE1B /* RecodeSources */ = {
+			isa = PBXGroup;
+			children = (
+				125885F51B73643F007AEE1B /* Freworks&libraries */,
+				125885D31B735BB8007AEE1B /* RecodeLibZetaPush */,
+				125885E01B735BB8007AEE1B /* RecodeLibZetaPushTests */,
+			);
+			name = RecodeSources;
+			sourceTree = "<group>";
+		};
+		1293A9C41B7B99EB005CDE2E /* ZetaServices */ = {
+			isa = PBXGroup;
+			children = (
+				1293A9C51B7B9A71005CDE2E /* ZTGlobalCallbacks+ZTGlobalCallbacks.h */,
+				1293A9C61B7B9A71005CDE2E /* ZTGlobalCallbacks+ZTGlobalCallbacks.m */,
+			);
+			name = ZetaServices;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXHeadersBuildPhase section */
+		125886CF1B73A31E007AEE1B /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				125886D01B73A32F007AEE1B /* ZTArrayQueue.h in Headers */,
+				125886D11B73A32F007AEE1B /* ZTCometClient.h in Headers */,
+				125886D21B73A32F007AEE1B /* ZTCometLongPollingTransport.h in Headers */,
+				125886D31B73A32F007AEE1B /* ZTCometMessage.h in Headers */,
+				125886D41B73A32F007AEE1B /* ZTCometSubscription.h in Headers */,
+				125886D51B73A32F007AEE1B /* ZTConcurrentQueue.h in Headers */,
+				125886D61B73A32F007AEE1B /* ZTQueue.h in Headers */,
+				125886D71B73A32F007AEE1B /* ZTQueueProcessor.h in Headers */,
+				1293A9C71B7B9A71005CDE2E /* ZTGlobalCallbacks+ZTGlobalCallbacks.h in Headers */,
+				1258870E1B73ACF2007AEE1B /* SBJson4.h in Headers */,
+				1258870F1B73ACF3007AEE1B /* SBJson4Parser.h in Headers */,
+				125887101B73ACF3007AEE1B /* SBJson4Parser.m in Headers */,
+				125887111B73ACF3007AEE1B /* SBJson4StreamParser.h in Headers */,
+				125887121B73ACF3007AEE1B /* SBJson4StreamParser.m in Headers */,
+				125887131B73ACF3007AEE1B /* SBJson4StreamParserState.h in Headers */,
+				12996B301B984AF700C3465E /* APLAppDelegate.h in Headers */,
+				125887141B73ACF3007AEE1B /* SBJson4StreamParserState.m in Headers */,
+				125887151B73ACF3007AEE1B /* SBJson4Writer.h in Headers */,
+				12996B341B984AF700C3465E /* Reachability.h in Headers */,
+				125887161B73ACF3007AEE1B /* SBJson4StreamTokeniser.h in Headers */,
+				125887171B73ACF3007AEE1B /* SBJson4StreamTokeniser.m in Headers */,
+				125887181B73ACF3007AEE1B /* SBJson4StreamWriter.h in Headers */,
+				125887191B73ACF3007AEE1B /* SBJson4StreamWriter.m in Headers */,
+				1258871A1B73ACF3007AEE1B /* SBJson4StreamWriterState.h in Headers */,
+				12996B321B984AF700C3465E /* APLViewController.h in Headers */,
+				1258871B1B73ACF3007AEE1B /* SBJson4StreamWriterState.m in Headers */,
+				1258871C1B73ACF3007AEE1B /* SBJson4Writer.m in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		1258870D1B73ACB7007AEE1B /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				121E56611B7499E400838C9E /* ZTCometSubscription.h in Headers */,
+				121E56711B7499FC00838C9E /* SBJson4StreamParserState.h in Headers */,
+				121E56761B7499FC00838C9E /* SBJson4StreamWriter.h in Headers */,
+				1293A9C81B7B9A71005CDE2E /* ZTGlobalCallbacks+ZTGlobalCallbacks.h in Headers */,
+				121E565E1B7499E400838C9E /* ZTCometClient.h in Headers */,
+				12996B331B984AF700C3465E /* APLViewController.h in Headers */,
+				121E565D1B7499E400838C9E /* ZTArrayQueue.h in Headers */,
+				121E566D1B7499FC00838C9E /* SBJson4Parser.h in Headers */,
+				121E56621B7499E400838C9E /* ZTConcurrentQueue.h in Headers */,
+				12996B351B984AF700C3465E /* Reachability.h in Headers */,
+				121E566C1B7499FC00838C9E /* SBJson4.h in Headers */,
+				121E565F1B7499E400838C9E /* ZTCometLongPollingTransport.h in Headers */,
+				121E56731B7499FC00838C9E /* SBJson4Writer.h in Headers */,
+				121E566F1B7499FC00838C9E /* SBJson4StreamParser.h in Headers */,
+				121E56641B7499E400838C9E /* ZTQueueProcessor.h in Headers */,
+				121E56601B7499E400838C9E /* ZTCometMessage.h in Headers */,
+				121E56781B7499FC00838C9E /* SBJson4StreamWriterState.h in Headers */,
+				12996B311B984AF700C3465E /* APLAppDelegate.h in Headers */,
+				121E56631B7499E400838C9E /* ZTQueue.h in Headers */,
+				121E56741B7499FC00838C9E /* SBJson4StreamTokeniser.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXHeadersBuildPhase section */
+
+/* Begin PBXNativeTarget section */
+		125885D01B735BB8007AEE1B /* RecodeLibZetaPush */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 125885E51B735BB8007AEE1B /* Build configuration list for PBXNativeTarget "RecodeLibZetaPush" */;
+			buildPhases = (
+				125885CD1B735BB8007AEE1B /* Sources */,
+				125885CE1B735BB8007AEE1B /* Frameworks */,
+				125885CF1B735BB8007AEE1B /* Copy Files */,
+				125886CF1B73A31E007AEE1B /* Headers */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = RecodeLibZetaPush;
+			productName = RecodeLibZetaPush;
+			productReference = 125885D11B735BB8007AEE1B /* libRecodeLibZetaPush.a */;
+			productType = "com.apple.product-type.library.static";
+		};
+		125885DB1B735BB8007AEE1B /* RecodeLibZetaPushTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 125885E81B735BB8007AEE1B /* Build configuration list for PBXNativeTarget "RecodeLibZetaPushTests" */;
+			buildPhases = (
+				125885D81B735BB8007AEE1B /* Sources */,
+				125885D91B735BB8007AEE1B /* Frameworks */,
+				125885DA1B735BB8007AEE1B /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				125885DF1B735BB8007AEE1B /* PBXTargetDependency */,
+			);
+			name = RecodeLibZetaPushTests;
+			productName = RecodeLibZetaPushTests;
+			productReference = 125885DC1B735BB8007AEE1B /* RecodeLibZetaPushTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		125886E01B73A426007AEE1B /* TestAllRecode */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 125887011B73A427007AEE1B /* Build configuration list for PBXNativeTarget "TestAllRecode" */;
+			buildPhases = (
+				125886DD1B73A426007AEE1B /* Sources */,
+				125886DE1B73A426007AEE1B /* Frameworks */,
+				125886DF1B73A426007AEE1B /* Resources */,
+				1258870D1B73ACB7007AEE1B /* Headers */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = TestAllRecode;
+			productName = TestAllRecode;
+			productReference = 125886E11B73A427007AEE1B /* TestAllRecode.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		125885C91B735BB8007AEE1B /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0630;
+				ORGANIZATIONNAME = Hakim;
+				TargetAttributes = {
+					125885D01B735BB8007AEE1B = {
+						CreatedOnToolsVersion = 6.3.1;
+					};
+					125885DB1B735BB8007AEE1B = {
+						CreatedOnToolsVersion = 6.3.1;
+					};
+					125886E01B73A426007AEE1B = {
+						CreatedOnToolsVersion = 6.3.1;
+					};
+				};
+			};
+			buildConfigurationList = 125885CC1B735BB8007AEE1B /* Build configuration list for PBXProject "RecodeLibZetaPush" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 125885C81B735BB8007AEE1B;
+			productRefGroup = 125885D21B735BB8007AEE1B /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				125885D01B735BB8007AEE1B /* RecodeLibZetaPush */,
+				125885DB1B735BB8007AEE1B /* RecodeLibZetaPushTests */,
+				125886E01B73A426007AEE1B /* TestAllRecode */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		125885DA1B735BB8007AEE1B /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		125886DF1B73A426007AEE1B /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				125886EF1B73A427007AEE1B /* Main.storyboard in Resources */,
+				125886F41B73A427007AEE1B /* LaunchScreen.xib in Resources */,
+				125886F11B73A427007AEE1B /* Images.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		125885CD1B735BB8007AEE1B /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				125886131B738744007AEE1B /* ZTCometClient.m in Sources */,
+				1258862D1B738A74007AEE1B /* SBJson4StreamWriter.m in Sources */,
+				125886181B738744007AEE1B /* ZTQueueProcessor.m in Sources */,
+				125886141B738744007AEE1B /* ZTCometLongPollingTransport.m in Sources */,
+				12996B391B984B0500C3465E /* APLAppDelegate.m in Sources */,
+				125886171B738744007AEE1B /* ZTConcurrentQueue.m in Sources */,
+				125886291B738A74007AEE1B /* SBJson4Parser.m in Sources */,
+				1258862C1B738A74007AEE1B /* SBJson4StreamTokeniser.m in Sources */,
+				1258862A1B738A74007AEE1B /* SBJson4StreamParser.m in Sources */,
+				1258862E1B738A74007AEE1B /* SBJson4StreamWriterState.m in Sources */,
+				125886161B738744007AEE1B /* ZTCometSubscription.m in Sources */,
+				125886151B738744007AEE1B /* ZTCometMessage.m in Sources */,
+				1293A9C91B7B9A71005CDE2E /* ZTGlobalCallbacks+ZTGlobalCallbacks.m in Sources */,
+				125886121B738744007AEE1B /* ZTArrayQueue.m in Sources */,
+				1258862F1B738A74007AEE1B /* SBJson4Writer.m in Sources */,
+				12996B3B1B984B0500C3465E /* APLViewController.m in Sources */,
+				12996B3D1B984B0500C3465E /* Reachability.m in Sources */,
+				1258862B1B738A74007AEE1B /* SBJson4StreamParserState.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		125885D81B735BB8007AEE1B /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		125886DD1B73A426007AEE1B /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				121E566B1B7499ED00838C9E /* ZTQueueProcessor.m in Sources */,
+				125886EC1B73A427007AEE1B /* ViewController.m in Sources */,
+				12996B3A1B984B0500C3465E /* APLAppDelegate.m in Sources */,
+				121E56791B7499FC00838C9E /* SBJson4StreamWriterState.m in Sources */,
+				121E56771B7499FC00838C9E /* SBJson4StreamWriter.m in Sources */,
+				121E56751B7499FC00838C9E /* SBJson4StreamTokeniser.m in Sources */,
+				12996B3C1B984B0500C3465E /* APLViewController.m in Sources */,
+				121E56651B7499ED00838C9E /* ZTArrayQueue.m in Sources */,
+				121E56681B7499ED00838C9E /* ZTCometLongPollingTransport.m in Sources */,
+				121E56671B7499ED00838C9E /* ZTCometMessage.m in Sources */,
+				12996B3E1B984B0500C3465E /* Reachability.m in Sources */,
+				121E56661B7499ED00838C9E /* ZTCometClient.m in Sources */,
+				121E56691B7499ED00838C9E /* ZTCometSubscription.m in Sources */,
+				121E567A1B7499FC00838C9E /* SBJson4Writer.m in Sources */,
+				1293A9CA1B7B9A71005CDE2E /* ZTGlobalCallbacks+ZTGlobalCallbacks.m in Sources */,
+				121E566A1B7499ED00838C9E /* ZTConcurrentQueue.m in Sources */,
+				121E56721B7499FC00838C9E /* SBJson4StreamParserState.m in Sources */,
+				121E56701B7499FC00838C9E /* SBJson4StreamParser.m in Sources */,
+				121E566E1B7499FC00838C9E /* SBJson4Parser.m in Sources */,
+				125886E91B73A427007AEE1B /* AppDelegate.m in Sources */,
+				125886E61B73A427007AEE1B /* main.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		125885DF1B735BB8007AEE1B /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 125885D01B735BB8007AEE1B /* RecodeLibZetaPush */;
+			targetProxy = 125885DE1B735BB8007AEE1B /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		125886ED1B73A427007AEE1B /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				125886EE1B73A427007AEE1B /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		125886F21B73A427007AEE1B /* LaunchScreen.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				125886F31B73A427007AEE1B /* Base */,
+			);
+			name = LaunchScreen.xib;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		125885E31B735BB8007AEE1B /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = NO;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.3;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = NO;
+				SDKROOT = iphoneos;
+			};
+			name = Debug;
+		};
+		125885E41B735BB8007AEE1B /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = NO;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.3;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		125885E61B735BB8007AEE1B /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ONLY_ACTIVE_ARCH = YES;
+				OTHER_LDFLAGS = "";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+			};
+			name = Debug;
+		};
+		125885E71B735BB8007AEE1B /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ONLY_ACTIVE_ARCH = YES;
+				OTHER_LDFLAGS = "";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+			};
+			name = Release;
+		};
+		125885E91B735BB8007AEE1B /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+				);
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = RecodeLibZetaPushTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		125885EA1B735BB8007AEE1B /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = RecodeLibZetaPushTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
+		125887021B73A427007AEE1B /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = (
+					armv7s,
+					armv7,
+				);
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_OBJC_ARC = NO;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = TestAllRecode/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				ONLY_ACTIVE_ARCH = NO;
+				OTHER_LDFLAGS = "-Objc";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALID_ARCHS = "armv7 armv7s";
+			};
+			name = Debug;
+		};
+		125887031B73A427007AEE1B /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = (
+					armv7s,
+					armv7,
+				);
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_OBJC_ARC = NO;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				INFOPLIST_FILE = TestAllRecode/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				OTHER_LDFLAGS = "-Objc";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALID_ARCHS = "armv7 armv7s";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		125885CC1B735BB8007AEE1B /* Build configuration list for PBXProject "RecodeLibZetaPush" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				125885E31B735BB8007AEE1B /* Debug */,
+				125885E41B735BB8007AEE1B /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		125885E51B735BB8007AEE1B /* Build configuration list for PBXNativeTarget "RecodeLibZetaPush" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				125885E61B735BB8007AEE1B /* Debug */,
+				125885E71B735BB8007AEE1B /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		125885E81B735BB8007AEE1B /* Build configuration list for PBXNativeTarget "RecodeLibZetaPushTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				125885E91B735BB8007AEE1B /* Debug */,
+				125885EA1B735BB8007AEE1B /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		125887011B73A427007AEE1B /* Build configuration list for PBXNativeTarget "TestAllRecode" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				125887021B73A427007AEE1B /* Debug */,
+				125887031B73A427007AEE1B /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 125885C91B735BB8007AEE1B /* Project object */;
+}

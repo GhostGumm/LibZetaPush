@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>SchemeUserState</key>
+	<dict>
+		<key>RecodeLibZetaPush.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>0</integer>
+		</dict>
+		<key>TestAllRecode.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>1</integer>
+		</dict>
+	</dict>
+	<key>SuppressBuildableAutocreation</key>
+	<dict>
+		<key>125885D01B735BB8007AEE1B</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>125885DB1B735BB8007AEE1B</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>125886E01B73A426007AEE1B</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>125886F81B73A427007AEE1B</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+	</dict>
+</dict>
+</plist>

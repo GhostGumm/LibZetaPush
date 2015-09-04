@@ -126,16 +126,16 @@ _______________________________________________
 #----------------- SERVICES ----------------- :
 
 
-As i said earlier the library is very easy to use.
+As said earlier, the library is very easy to use.
 
 To Trigger and send a Service you will have three steps to follow :
 
 - 1 : Open the ZetaPush General Technical Documentation on your browser and please read it. (You didn't see the RTFM coming huh ? :) )
 
-- 2 : If you are developping under Xcode, wich i think and hope is the case, you will have to invoke a service from the ZTCometClient class.
+- 2 : If you are developping under Xcode, wich i think and hope is the case, you will have to invoke services from the ZTCometClient class.
       As the dunk man uses bottles to fight, the Druid nature to heal and the Mage Magic to blow things up, we will use the power of Xcode indexation to ease up the work.
       
-      1 - First Ask your already initialized client variable to show what services are avaible. All services are prefixed by the "Invoke" Tag so type :
+      1 - First Ask your already initialized client object to show what services are avaible. All services are prefixed by the "Invoke" Tag so type :
       	  [m_client invoke]
       	  Xcode will then show you all the avaible services, but i think you will find it very exhausting to read all the list and pick what you are looking for.
 
@@ -143,7 +143,7 @@ To Trigger and send a Service you will have three steps to follow :
       	  [m_client invokeS3]
       	  Xcode will then show us all the Services avaible for this particular category.
 
-      Now just pick the Service you want, like the "list" one and lets see how to fill in the informations.
+      Now just pick the Service you want, and lets see how to fill in the informations.
       
 - 3 : To be clear lets keep our invokeS3List service example :
 
